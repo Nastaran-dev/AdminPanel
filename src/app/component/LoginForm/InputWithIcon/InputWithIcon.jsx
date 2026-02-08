@@ -48,10 +48,7 @@ export default function InputWithIcon() {
         {showPassword ? (
           <VisibilityIcon sx={StyleTextField.Icon} onClick={togglePassword} />
         ) : (
-          <VisibilityOffIcon
-            sx={StyleTextField.Icon}
-            onClick={togglePassword}
-          />
+          <VisibilityOffIcon sx={StyleTextField.Icon} onClick={togglePassword} />
         )}
         <Input
           type={showPassword ? "text" : "password"}
