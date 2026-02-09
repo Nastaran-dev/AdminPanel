@@ -4,7 +4,7 @@ import './globals.css'
 import {QueryClient , QueryClientProvider } from '@tanstack/react-query'
 const queryClient = new QueryClient()
 const nacyFont = localFont({
-  src: '../../public/Font/nacy.ttf',
+  src: '../../public/Font/Raleway-VariableFont_wght.ttf',
   variable: '--font-nacy',
   display: 'swap',
 })

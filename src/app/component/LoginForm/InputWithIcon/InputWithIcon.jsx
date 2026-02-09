@@ -16,19 +16,22 @@ import CircularProgress from "@mui/material/CircularProgress";
 const StyleTextField = {
   Text: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "flex-end",
     justifyContent: "center",
-    padding: "20px",
+    padding: "0 20px ",
   },
   Icon: {
     color: "action.active",
-    mr: 1,
-    my: 0.5,
+    // mr: 1,
+    // my: 0.5,
+    
     cursor: "pointer",
   },
   login: {
     width: "100%",
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     padding: "0 20px",
   },
@@ -45,8 +48,7 @@ export default function InputWithIcon() {
     mutationFn: Loginservice,
     onSuccess: (data) => {
       console.log("Login successful");
-      router.push("/dashboard");
-    },
+      router.push("/dashboard");},
     onError: (error) => {
       console.error("Login failed:", error);
     },
@@ -57,10 +59,10 @@ export default function InputWithIcon() {
       password: "",
     },
     validationSchema: Yup.object({
-      username: Yup.string().required("Username is required"),
+      username: Yup.string().required("Username is invalid"),
       password: Yup.string()
-        .min(6, "حداقل 6 کاراکتر")
-        .required("Password is required"),
+        .min(6)
+        .required("Password isinvalid"),
     }),
     onSubmit: (values) => {
       mutation.mutate(values);
@@ -79,35 +81,39 @@ export default function InputWithIcon() {
         </Alert>
       )}
       <Box sx={StyleTextField.Text}>
-        <AccountCircle sx={StyleTextField.Icon} />
-        <Input
-          {...formik.getFieldProps("username")}
-          type="text"
-          placeholder="Username"
-          fullWidth
-        />
-        {formik.touched.username && formik.errors.username ? (
-          <Box>{formik.errors.username}</Box>
-        ) : null}
-      </Box>
-      <Box sx={StyleTextField.Text}>
-        {showPassword ? (
-          <VisibilityIcon sx={StyleTextField.Icon} onClick={togglePassword} />
-        ) : (
-          <VisibilityOffIcon
-            sx={StyleTextField.Icon}
-            onClick={togglePassword}
+        <Box sx={{ width: "100%" }}>
+          <AccountCircle sx={StyleTextField.Icon} />{" "}
+          <Input
+            {...formik.getFieldProps("username")}
+            type="text"
+            placeholder="Username"
+            fullWidth
           />
-        )}
-        <Input
-          type={showPassword ? "text" : "password"}
-          {...formik.getFieldProps("password")}
-          placeholder="Password"
-          fullWidth
-        />
-        {formik.touched.password && formik.errors.password ? (
-          <Box>{formik.errors.password}</Box>
-        ) : null}
+          {formik.touched.username && formik.errors.username ? (
+            <Box>{formik.errors.username}</Box>
+          ) : null}
+        </Box>
+      </Box>
+
+      <Box sx={StyleTextField.Text}>
+        <Box sx={{width:"100%"}}  >       {showPassword ? (
+            <VisibilityIcon sx={StyleTextField.Icon} onClick={togglePassword} />
+          ) : (
+            <VisibilityOffIcon
+              sx={StyleTextField.Icon}
+              onClick={togglePassword}
+            />
+          )}
+          <Input
+            type={showPassword ? "text" : "password"}
+            {...formik.getFieldProps("password")}
+            placeholder="Password"
+            fullWidth
+          />
+          {formik.touched.password && formik.errors.password ? (
+            <Box>{formik.errors.password}</Box>
+          ) : null}
+        </Box>
       </Box>
 
       <Box sx={StyleTextField.login}>
