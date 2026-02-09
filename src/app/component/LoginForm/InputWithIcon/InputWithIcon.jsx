@@ -36,7 +36,7 @@ export default function InputWithIcon() {
   };
 
   return (
-    <Box sx={{ "& > :not(style)": { m: 1 } }}>
+    <Box component="form"  sx={{ "& > :not(style)": { m: 1 } }}>
       {/* Username */}
       <Box sx={StyleTextField.Text}>
         <AccountCircle sx={StyleTextField.Icon} />
