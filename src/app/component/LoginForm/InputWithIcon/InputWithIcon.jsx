@@ -6,11 +6,13 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Input from "@mui/material/Input";
 import { useState } from "react";
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Loginservice } from "../../../../Services/auth";
 import { useRouter } from "next/navigation";
-
+import { useMutation } from "@tanstack/react-query";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
 const StyleTextField = {
   Text: {
     display: "flex",
@@ -34,12 +36,21 @@ const StyleTextField = {
 
 export default function InputWithIcon() {
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
-
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
   };
 
+  const router = useRouter();
+  const mutation = useMutation({
+    mutationFn: Loginservice,
+    onSuccess: (data) => {
+      console.log("Login successful");
+      router.push("/dashboard");
+    },
+    onError: (error) => {
+      console.error("Login failed:", error);
+    },
+  });
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -51,13 +62,8 @@ export default function InputWithIcon() {
         .min(6, "حداقل 6 کاراکتر")
         .required("Password is required"),
     }),
-    onSubmit: async (values) => {
-      try {
-        await Loginservice(values);
-        router.push("/dashboard");
-      } catch (error) {
-        console.error("Login failed:", error);
-      }
+    onSubmit: (values) => {
+      mutation.mutate(values);
     },
   });
 
@@ -67,6 +73,11 @@ export default function InputWithIcon() {
       onSubmit={formik.handleSubmit}
       sx={{ "& > :not(style)": { m: 1 } }}
     >
+      {mutation.isError && (
+        <Alert severity="error" sx={{ color: "red" }}>
+          Login failed. Please try again.
+        </Alert>
+      )}
       <Box sx={StyleTextField.Text}>
         <AccountCircle sx={StyleTextField.Icon} />
         <Input
@@ -75,7 +86,9 @@ export default function InputWithIcon() {
           placeholder="Username"
           fullWidth
         />
-        {formik.touched.username && formik.errors.username ? (<Box>{formik.errors.password}</Box>) : null}
+        {formik.touched.username && formik.errors.username ? (
+          <Box>{formik.errors.username}</Box>
+        ) : null}
       </Box>
       <Box sx={StyleTextField.Text}>
         {showPassword ? (
@@ -92,6 +105,9 @@ export default function InputWithIcon() {
           placeholder="Password"
           fullWidth
         />
+        {formik.touched.password && formik.errors.password ? (
+          <Box>{formik.errors.password}</Box>
+        ) : null}
       </Box>
 
       <Box sx={StyleTextField.login}>
@@ -104,9 +120,9 @@ export default function InputWithIcon() {
             marginTop: "10%",
             backgroundColor: "black",
           }}
-          disableElevation
+          disabled={mutation.isloading}
         >
-          {formik.isSubmitting ? "Submitting..." : "Login"}
+          {mutation.isloading ? <CircularProgress size={24} /> : "Login"}
         </Button>
       </Box>
     </Box>
