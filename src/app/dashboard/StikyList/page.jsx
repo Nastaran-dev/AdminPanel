@@ -29,7 +29,12 @@ import CachedIcon from "@mui/icons-material/Cached";
 import CameraFrontIcon from "@mui/icons-material/CameraFront";
 import DnsIcon from "@mui/icons-material/Dns";
 import Button from "@mui/material/Button";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useState } from "react";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+import { useEffect } from "react";
 const data = [
   { icon: <People />, label: "Dashboard" },
   { icon: <DnsIcon />, label: "Employees" },
@@ -59,11 +64,17 @@ const FireNav = styled(List)({
     fontSize: 20,
   },
 });
-
 export default function CustomizedList() {
+  const theme = useTheme();
+  const Islaptop = useMediaQuery(theme.breakpoints.up("md"));
+  const [showIcon, setShowicon] = useState(Islaptop);
   const [open, setOpen] = React.useState(true);
+  useEffect(() => {
+  Islaptop && setShowicon(Islaptop);
+  }, [Islaptop]);
+
   return (
-    <Box sx={{ xs:"none" ,display: "flex" }}>
+    <Box sx={{ display: "flex" }}>
       <ThemeProvider
         theme={createTheme({
           components: {
@@ -80,190 +91,139 @@ export default function CustomizedList() {
           },
         })}
       >
-        <Paper elevation={0} sx={{ maxWidth: 256 }}>
-          <FireNav component="nav" disablePadding>
-            <ListItemButton component="a" href="#customized-list">
-              <Box
-                sx={{ display: "flex", alignItems: "center", gap: 1, py: 2 }}
-              >
-                <Image
-                  src="/images/logo.svg"
-                  width={50}
-                  height={50}
-                  alt="logo"
-                ></Image>
-                <ListItemText
-                  primary="HexaBox"
-                  primaryTypographyProps={{
-                    color: "primary",
-                    fontWeight: "medium",
-                    variant: "h5",
-                  }}
-                />
-              </Box>
-            </ListItemButton>
-            <Divider />
-            <ListItem component="div" disablePadding>
-              <ListItemButton
-                sx={{ display: "flex", alignItems: "center", gap: 1 }}
-              >
-                <ListItemIcon
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1,
-                    height: "100%",
-                  }}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "0",
+            left: "0",
+            zIndex: "999",
+            padding: { xs:"10px", md: "60px 220px" },
+          }}
+        >
+          <DoubleArrowIcon
+            sx={{ color: "gray" }}
+            onClick={() => {
+              setShowicon(!showIcon);
+            }}
+          />
+        </Box>
+        {showIcon && (
+          <Paper elevation={0}  sx={{ maxWidth: 256 }}>
+            <FireNav component="nav" disablePadding>
+              <ListItemButton component="a" href="#customized-list">
+                <Box
+                  sx={{ display: "flex", alignItems: "center", gap: 1, py: 2 }}
                 >
-                  <Home color="primary" />
-                  <ListItemText primary="Project overview" />
-                </ListItemIcon>
-              </ListItemButton>
-              <Tooltip title="Project Settings">
-                <IconButton
-                  size="large"
-                  sx={{
-                    "& svg": {
-                      color: "rgba(255,255,255,0.8)",
-                      transition: "0.2s",
-                      transform: "translateX(0) rotate(0)",
-                    },
-                    "&:hover, &:focus": {
-                      bgcolor: "unset",
-                      "& svg:first-of-type": {
-                        transform: "translateX(-4px) rotate(-20deg)",
-                      },
-                      "& svg:last-of-type": {
-                        right: 0,
-                        opacity: 1,
-                      },
-                    },
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      height: "80%",
-                      display: "block",
-                      left: 0,
-                      width: "1px",
-                      bgcolor: "divider",
-                    },
-                  }}
-                >
-                  <Settings />
-                  <ArrowRight
-                    sx={{ position: "absolute", right: 4, opacity: 0 }}
+                  <Image
+                    src="/images/logo.svg"
+                    width={50}
+                    height={50}
+                    alt="logo"
+                  ></Image>
+                  <ListItemText
+                    primary="HexaBox"
+                    primaryTypographyProps={{
+                      color: "primary",
+                      fontWeight: "medium",
+                      variant: "h5",
+                    }}
                   />
-                </IconButton>
-              </Tooltip>
-            </ListItem>
-            <Divider />
-            <Box
-              sx={[
-                open
-                  ? {
-                      bgcolor: "rgba(71, 98, 130, 0.2)",
-                    }
-                  : {
-                      bgcolor: null,
-                    },
-                open
-                  ? {
-                      pb: 2,
-                    }
-                  : {
-                      pb: 0,
-                    },
-              ]}
-            >
-              <ListItemButton
-                alignItems="flex-start"
-                onClick={() => setOpen(!open)}
-                sx={[
-                  {
-                    px: 3,
-                    pt: 2.5,
-                  },
-                  open
-                    ? {
-                        pb: 0,
-                      }
-                    : {
-                        pb: 2.5,
-                      },
-                  open
-                    ? {
-                        "&:hover, &:focus": {
-                          "& svg": {
-                            opacity: 1,
-                          },
-                        },
-                      }
-                    : {
-                        "&:hover, &:focus": {
-                          "& svg": {
-                            opacity: 0,
-                          },
-                        },
-                      },
-                ]}
-              >
-                <ListItemText
-                  primary="YOUR COMPANY"
-                  primaryTypographyProps={{
-                    fontSize: 15,
-                    lineHeight: "20px",
-                    mb: "2px",
-                  }}
-                  secondary="Authentication, Firestore Database"
-                  secondaryTypographyProps={{
-                    noWrap: true,
-                    fontSize: 16,
-                    lineHeight: "16px",
-                    color: open ? "rgba(0,0,0,0)" : "rgba(255,255,255,0.5)",
-                  }}
-                  sx={{ my: 0 }}
-                />
-                <KeyboardArrowDown
-                  sx={[
-                    {
-                      mr: -1,
-                      opacity: 0,
-                      transition: "0.2s",
-                    },
-                    open
-                      ? {
-                          transform: "rotate(-180deg)",
-                        }
-                      : {
-                          transform: "rotate(0)",
-                        },
-                  ]}
-                />
+                </Box>
               </ListItemButton>
-              {open &&
-                data.map((item) => (
-                  <ListItemButton 
-                    key={item.label}
-                    sx={{ py: 0, minHeight: 55, color: "white" }}
+              <Divider />
+              <ListItem component="div" disablePadding>
+                <ListItemButton
+                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                      height: "100%",
+                    }}
                   >
-                    <ListItemIcon sx={{ color: "#969fb5" }}>
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={item.label}
-                      primaryTypographyProps={{
-                        fontSize: 15,
-                       
-                      }}
+                    <Home color="primary" />
+                    <ListItemText primary="Project overview" />
+                  </ListItemIcon>
+                </ListItemButton>
+                <Tooltip title="Project Settings">
+                  <IconButton
+                    size="large"
+                    
+                  >
+                    <Settings />
+                    <ArrowRight
+                      sx={{ position: "absolute", right: 4, opacity: 0 }}
                     />
-                  </ListItemButton>
-                ))}
-                <Box sx={{width:"100%" , justifyContent:"center" , padding:"5px 10px"}}> <Button variant="contained" sx={{width:"100%" , backgroundColor:"#08a36b" , color:"white"}} endIcon={<ArrowForwardIcon />} disableElevation>
-                Disable elevation
-              </Button></Box>
-            </Box>
-          </FireNav>
-        </Paper>
+                  </IconButton>
+                </Tooltip>
+              </ListItem>
+              <Divider />
+              <Box>
+                <ListItemButton
+                  alignItems="flex-start"
+                  onClick={() => setOpen(!open)}
+                >
+                  <ListItemText
+                    primary="YOUR COMPANY"
+                    primaryTypographyProps={{
+                      fontSize: 15,
+                      lineHeight: "20px",
+                      mb: "2px",
+                    }}
+                    secondary="Authentication, Firestore Database"
+                    secondaryTypographyProps={{
+                      noWrap: true,
+                      fontSize: 16,
+                      lineHeight: "16px",
+                      color: open ? "rgba(0,0,0,0)" : "rgba(255,255,255,0.5)",
+                    }}
+                    sx={{ my: 0 }}
+                  />
+                </ListItemButton>
+                {open &&
+                  data.map((item) => (
+                    <ListItemButton
+                      key={item.label}
+                      sx={{ py: 0, minHeight: 55, color: "white" }}
+                    >
+                      <ListItemIcon sx={{ color: "#969fb5" }}>
+                        {item.icon}
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={item.label}
+                        primaryTypographyProps={{
+                          fontSize: 15,
+                        }}
+                        
+                      />
+                    </ListItemButton>
+                  ))}
+                <Box
+                  sx={{
+                    width: "100%",
+                    justifyContent: "center",
+                    padding: "5px 10px",
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    sx={{
+                      width: "100%",
+                      backgroundColor: "#08a36b",
+                      color: "white",
+                    }}
+                    endIcon={<ArrowForwardIcon />}
+                    disableElevation
+                  >
+                    Disable elevation
+                  </Button>
+                </Box>
+              </Box>
+            </FireNav>
+          </Paper>
+        )}
       </ThemeProvider>
     </Box>
   );
