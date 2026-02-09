@@ -6,8 +6,11 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Input from "@mui/material/Input";
 import { useState } from "react";
-import { useFormik } from "formik";
-import {Loginservice} from "./services/auth"
+import { Formik, useFormik } from "formik";
+import * as Yup from "yup";
+import { Loginservice } from "../../../../Services/auth";
+import { useRouter } from "next/navigation";
+
 const StyleTextField = {
   Text: {
     display: "flex",
@@ -31,27 +34,61 @@ const StyleTextField = {
 
 export default function InputWithIcon() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
   };
 
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      username: Yup.string().required("Username is required"),
+      password: Yup.string()
+        .min(6, "حداقل 6 کاراکتر")
+        .required("Password is required"),
+    }),
+    onSubmit: async (values) => {
+      try {
+        await Loginservice(values);
+        router.push("/dashboard");
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    },
+  });
+
   return (
-    <Box component="form"  sx={{ "& > :not(style)": { m: 1 } }}>
-      {/* Username */}
+    <Box
+      component="form"
+      onSubmit={formik.handleSubmit}
+      sx={{ "& > :not(style)": { m: 1 } }}
+    >
       <Box sx={StyleTextField.Text}>
         <AccountCircle sx={StyleTextField.Icon} />
-        <Input type="text" placeholder="Username" fullWidth />
+        <Input
+          {...formik.getFieldProps("username")}
+          type="text"
+          placeholder="Username"
+          fullWidth
+        />
+        {formik.touched.username && formik.errors.username ? (<Box>{formik.errors.password}</Box>) : null}
       </Box>
-
-      {/* Password */}
       <Box sx={StyleTextField.Text}>
         {showPassword ? (
           <VisibilityIcon sx={StyleTextField.Icon} onClick={togglePassword} />
         ) : (
-          <VisibilityOffIcon sx={StyleTextField.Icon} onClick={togglePassword} />
+          <VisibilityOffIcon
+            sx={StyleTextField.Icon}
+            onClick={togglePassword}
+          />
         )}
         <Input
           type={showPassword ? "text" : "password"}
+          {...formik.getFieldProps("password")}
           placeholder="Password"
           fullWidth
         />
@@ -59,6 +96,7 @@ export default function InputWithIcon() {
 
       <Box sx={StyleTextField.login}>
         <Button
+          type="submit"
           fullWidth
           variant="contained"
           sx={{
@@ -68,7 +106,7 @@ export default function InputWithIcon() {
           }}
           disableElevation
         >
-          Login
+          {formik.isSubmitting ? "Submitting..." : "Login"}
         </Button>
       </Box>
     </Box>
