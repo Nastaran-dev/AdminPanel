@@ -35,16 +35,18 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
-import AvatarGroup from "@mui/material/AvatarGroup";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ContactlessOutlinedIcon from "@mui/icons-material/ContactlessOutlined";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import EditIcon from '@mui/icons-material/Edit';
+ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 const data = [
   { icon: <People />, label: "Dashboard" },
   { icon: <DnsIcon />, label: "Employees" },
@@ -67,6 +69,13 @@ const data2 = [
   { icon: <DnsIcon />, label: "Notification" },
   { icon: <People />, label: "settting" },
 ];
+
+const peopel = [
+  { title: "new order", info: "10 Aug 2020" },
+  { title: "new order", info: "10 Aug 2020" },
+  { title: "new order", info: "10 Aug 2020" },
+  { title: "new order", info: "10 Aug 2020" },
+];
 const FireNav = styled(List)({
   "& .MuiListItemButton-root": {
     paddingLeft: 24,
@@ -80,6 +89,35 @@ const FireNav = styled(List)({
     fontSize: 20,
   },
 });
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
+}
+
+CustomTabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
 export default function CustomizedList({ children }) {
   const theme = useTheme();
   const Islaptop = useMediaQuery(theme.breakpoints.up("md"), { noSsr: true });
@@ -97,7 +135,11 @@ export default function CustomizedList({ children }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const [List, setList] = useState(false);
   return (
     <Box sx={{ display: "flex", width: "100%", position: "sticky", top: 0 }}>
       <ThemeProvider
@@ -319,7 +361,14 @@ export default function CustomizedList({ children }) {
             gap: { md: "20px" },
           }}
         >
-          <Box sx={{ display: "flex", gap: "15px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "15px",
+              border: "1px solid red",
+              alignItems: "center",
+            }}
+          >
             <AddIcon
               sx={{
                 background: "white",
@@ -328,73 +377,139 @@ export default function CustomizedList({ children }) {
                 border: "1px solid black",
               }}
             />
-            <NotificationsNoneOutlinedIcon />
-            <ContactlessOutlinedIcon />
-          </Box>
-          <Box sx={{ pl: 1 }}>
-            <Avatar
-              alt="Remy Sharp"
-              src="/images/nacy.jpg"
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            ></Avatar>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={openn}
-              onClose={handleClose}
-              slotProps={{
-                list: {
-                  "aria-labelledby": "basic-button",
-                },
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src="/images/nacy.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Nastaran Mohammadi"
-                  secondary={<React.Fragment>{"Web Designer"}</React.Fragment>}
-                />
-              </ListItem>
-              {data2.map((val, i) => {
-                return (
-                  <ListItem key={i} sx={{ p: 0 }}>
-                    <ListItemButton>
-                      <Box sx={{ color: "#593ae0", scale: "0.8" }}>
-                        {val.icon}
-                      </Box>
-                      <ListItemText
-                        primary={val.label}
-                        primaryTypographyProps={{
-                          fontSize: 15,
-                        }}
-                        sx={{ padding: "0 5px" }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
-              <Divider />
-              <ListItem sx={{ p: 0 }}>
-                <ListItemButton>
-                  <Box sx={{ color: "red", scale: "0.8" }}>
-                    <LogoutIcon />
+              {" "}
+              <NotificationsNoneOutlinedIcon
+                onClick={() => {
+                  setList(!List);
+                }}
+              />
+              {List && (
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "60px",
+                    right: 0,
+                  }}
+                >
+                  <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                    <Tabs
+                      value={value}
+                      onChange={handleChange}
+                      aria-label="basic tabs example"
+                    >
+                      <Tab label="Notes" {...a11yProps(0)} />
+                      <Tab label="Alerts" {...a11yProps(1)} />
+                      <Tab label="Chats" {...a11yProps(2)} />
+                    </Tabs>
                   </Box>
+                  <CustomTabPanel sx={{ p: 0 }} value={value} index={0}>
+                    {peopel.map((val) => {
+                      return (
+                        <>
+                          <Box sx={{display:"flex" , alignItems:"center"}}>
+                            <ListItem alignItems="flex-start">
+                              <ListItemText
+                                primary={val.title}
+                                secondary={
+                                  <React.Fragment>{val.info}</React.Fragment>
+                                }
+                              />
+                            </ListItem>
+                            <Box sx={{display:"flex"}}>
+                               <EditIcon sx={{color:"blue"}}/>
+                                <DeleteForeverIcon sx={{color:"red"}}/>
+                            </Box>
+                            
+                          </Box>
+                        </>
+                      );
+                    })}
+                  </CustomTabPanel>
+                  <CustomTabPanel value={value} index={1}>
+                    Item Two
+                  </CustomTabPanel>
+                  <CustomTabPanel value={value} index={2}>
+                    Item Three
+                  </CustomTabPanel>
+                </Box>
+              )}
+            </Box>
+            <ContactlessOutlinedIcon />
+
+            <Box sx={{ pl: 1 }}>
+              <Avatar
+                alt="Remy Sharp"
+                src="/images/nacy.jpg"
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              ></Avatar>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={openn}
+                onClose={handleClose}
+                slotProps={{
+                  list: {
+                    "aria-labelledby": "basic-button",
+                  },
+                }}
+              >
+                <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src="/images/nacy.jpg" />
+                  </ListItemAvatar>
                   <ListItemText
-                    primary="Logut"
-                    primaryTypographyProps={{
-                      fontSize: 15,
-                    }}
-                    sx={{ padding: "0 5px" }}
+                    primary="Nastaran Mohammadi"
+                    secondary={
+                      <React.Fragment>{"Web Designer"}</React.Fragment>
+                    }
                   />
-                </ListItemButton>
-              </ListItem>
-            </Menu>
+                </ListItem>
+                {data2.map((val, i) => {
+                  return (
+                    <ListItem key={i} sx={{ p: 0 }}>
+                      <ListItemButton>
+                        <Box sx={{ color: "#593ae0", scale: "0.8" }}>
+                          {val.icon}
+                        </Box>
+                        <ListItemText
+                          primary={val.label}
+                          primaryTypographyProps={{
+                            fontSize: 15,
+                          }}
+                          sx={{ padding: "0 5px" }}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                })}
+                <Divider />
+                <ListItem sx={{ p: 0 }}>
+                  <ListItemButton>
+                    <Box sx={{ color: "red", scale: "0.8" }}>
+                      <LogoutIcon />
+                    </Box>
+                    <ListItemText
+                      primary="Logut"
+                      primaryTypographyProps={{
+                        fontSize: 15,
+                      }}
+                      sx={{ padding: "0 5px" }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              </Menu>
+            </Box>
           </Box>
         </Box>
       </Box>
