@@ -12,7 +12,6 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import ArrowRight from "@mui/icons-material/ArrowRight";
-import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import Home from "@mui/icons-material/Home";
 import Settings from "@mui/icons-material/Settings";
 import People from "@mui/icons-material/People";
@@ -35,6 +34,12 @@ import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useEffect } from "react";
+import Avatar from "@mui/material/Avatar";
+import AvatarGroup from "@mui/material/AvatarGroup";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import ContactlessOutlinedIcon from "@mui/icons-material/ContactlessOutlined";
+import Typography from "@mui/material/Typography";
+import AddIcon from "@mui/icons-material/Add";
 const data = [
   { icon: <People />, label: "Dashboard" },
   { icon: <DnsIcon />, label: "Employees" },
@@ -64,17 +69,17 @@ const FireNav = styled(List)({
     fontSize: 20,
   },
 });
-export default function CustomizedList() {
+export default function CustomizedList({ children }) {
   const theme = useTheme();
   const Islaptop = useMediaQuery(theme.breakpoints.up("md"));
   const [showIcon, setShowicon] = useState(Islaptop);
   const [open, setOpen] = React.useState(true);
   useEffect(() => {
-  Islaptop && setShowicon(Islaptop);
+    Islaptop && setShowicon(Islaptop);
   }, [Islaptop]);
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", width: "100%"}}>
       <ThemeProvider
         theme={createTheme({
           components: {
@@ -93,11 +98,13 @@ export default function CustomizedList() {
       >
         <Box
           sx={{
+            display: { xs: "none", md: "flex" },
+         
             position: "absolute",
-            top: "0",
-            left: "0",
+           
+            top: "20px",
+            left: "20px",
             zIndex: "999",
-            padding: { xs:"10px", md: "60px 220px" },
           }}
         >
           <DoubleArrowIcon
@@ -108,11 +115,14 @@ export default function CustomizedList() {
           />
         </Box>
         {showIcon && (
-          <Paper elevation={0}  sx={{ maxWidth: 256 }}>
+          <Paper
+            elevation={0}
+            sx={{ maxWidth: 256, width: 240, flexShrink: 0 }}
+          >
             <FireNav component="nav" disablePadding>
               <ListItemButton component="a" href="#customized-list">
                 <Box
-                  sx={{ display: "flex", alignItems: "center", gap: 1, py: 2 }}
+                  sx={{ display: "flex", alignItems: "center", gap: 1, py: 2 , px: 3}}
                 >
                   <Image
                     src="/images/logo.svg"
@@ -148,10 +158,7 @@ export default function CustomizedList() {
                   </ListItemIcon>
                 </ListItemButton>
                 <Tooltip title="Project Settings">
-                  <IconButton
-                    size="large"
-                    
-                  >
+                  <IconButton size="large">
                     <Settings />
                     <ArrowRight
                       sx={{ position: "absolute", right: 4, opacity: 0 }}
@@ -196,7 +203,6 @@ export default function CustomizedList() {
                         primaryTypographyProps={{
                           fontSize: 15,
                         }}
-                        
                       />
                     </ListItemButton>
                   ))}
@@ -225,6 +231,71 @@ export default function CustomizedList() {
           </Paper>
         )}
       </ThemeProvider>
+      {/* menu mobile */}
+      <Box
+        sx={{
+          display: { xs: "flex" },
+          justifyContent: "space-between",
+          alignItems: "center",
+          height: "60px",
+          padding: "10px 10px",
+          width: "100%",
+        }}
+      >
+        <Box sx={{display:"flex",alignItems:"center",gap:1}}>
+          <Typography
+            sx={{ padding: "10px 40px", display: { xs: "none", md: "flex" } }}
+          >
+            eCommerce Dashboard
+          </Typography>
+           <Box
+                  sx={{ display: {md:"none"}, alignItems: "center", gap: 1, py: 2 }}
+                >
+                  <Image
+                    src="/images/logo.svg"
+                    width={30}
+                    height={30}
+                    alt="logo"
+                  ></Image>
+                  
+                </Box>
+          <Box
+            sx={{
+              display: { xs: "flex", md: "none" },
+              alignItems: "center",
+              height: "100%",
+              border: "5px solid red",
+            }}
+          >
+            <DoubleArrowIcon
+              sx={{ color: "gray" }}
+              onClick={() => {
+                setShowicon(!showIcon);
+              }}
+            />
+          </Box>
+           
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            gap: { md: "20px" },
+          }}
+        >
+          <Box sx={{ display: "flex", gap: "15px" }}>
+            <AddIcon />
+            <NotificationsNoneOutlinedIcon />
+            <ContactlessOutlinedIcon />
+          </Box>
+          <AvatarGroup max={4} sx={{ paddingLeft: "15px" }}>
+            <Avatar alt="Remy Sharp" src="/images/nacy.jpg" />
+          </AvatarGroup>
+        </Box>
+      </Box>
+      {/* <Box sx={{flex:1 ,border:"5px solid green"}}>{children}</Box> */}
     </Box>
   );
 }

@@ -1,9 +1,6 @@
-import React from 'react'
-import CustomizedList from './StikyList/page'
-export default function dashboard() {
+
+export default function GroupAvatars() {
   return (
-    <div>
-      <CustomizedList/>
-    </div>
-  )
+    <></>
+  );
 }
