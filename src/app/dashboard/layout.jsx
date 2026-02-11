@@ -40,6 +40,11 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import ContactlessOutlinedIcon from "@mui/icons-material/ContactlessOutlined";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 const data = [
   { icon: <People />, label: "Dashboard" },
   { icon: <DnsIcon />, label: "Employees" },
@@ -55,7 +60,13 @@ const data = [
   { icon: <CachedIcon />, label: "Profile" },
   { icon: <CameraFrontIcon />, label: "Account" },
 ];
-
+const data2 = [
+  { icon: <People />, label: "Profile" },
+  { icon: <DnsIcon />, label: "My project" },
+  { icon: <People />, label: "Message" },
+  { icon: <DnsIcon />, label: "Notification" },
+  { icon: <People />, label: "settting" },
+];
 const FireNav = styled(List)({
   "& .MuiListItemButton-root": {
     paddingLeft: 24,
@@ -71,15 +82,24 @@ const FireNav = styled(List)({
 });
 export default function CustomizedList({ children }) {
   const theme = useTheme();
-  const Islaptop = useMediaQuery(theme.breakpoints.up("md") ,{noSsr:true});
+  const Islaptop = useMediaQuery(theme.breakpoints.up("md"), { noSsr: true });
   const [showIcon, setShowicon] = useState(Islaptop);
+
   const [open, setOpen] = React.useState(true);
   useEffect(() => {
-      setShowicon(Islaptop);
+    setShowicon(Islaptop);
   }, [Islaptop]);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openn = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <Box sx={{ display: "flex", width: "100%"}}>
+    <Box sx={{ display: "flex", width: "100%", position: "sticky", top: 0 }}>
       <ThemeProvider
         theme={createTheme({
           components: {
@@ -99,9 +119,9 @@ export default function CustomizedList({ children }) {
         <Box
           sx={{
             display: { xs: "none", md: "flex" },
-         
+
             position: "absolute",
-           
+
             top: "20px",
             left: "20px",
             zIndex: "999",
@@ -122,7 +142,13 @@ export default function CustomizedList({ children }) {
             <FireNav component="nav" disablePadding>
               <ListItemButton component="a" href="#customized-list">
                 <Box
-                  sx={{ display: "flex", alignItems: "center", gap: 1, py: 2 , px: 3}}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    py: 2,
+                    px: 3,
+                  }}
                 >
                   <Image
                     src="/images/logo.svg"
@@ -235,46 +261,54 @@ export default function CustomizedList({ children }) {
       <Box
         sx={{
           display: { xs: "flex" },
+          flexWrap: "wrap",
           justifyContent: "space-between",
           alignItems: "center",
           height: "60px",
-          padding: "10px 10px",
+          padding: "0px 10px",
           width: "100%",
         }}
       >
-        <Box sx={{display:"flex",alignItems:"center",gap:1}}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <Typography
             sx={{ padding: "10px 40px", display: { xs: "none", md: "flex" } }}
           >
             eCommerce Dashboard
           </Typography>
-           <Box
-                  sx={{ display: {md:"none"}, alignItems: "center", gap: 1, py: 2 }}
-                >
-                  <Image
-                    src="/images/logo.svg"
-                    width={30}
-                    height={30}
-                    alt="logo"
-                  ></Image>
-                  
-                </Box>
+          <Box
+            sx={{
+              display: { md: "none" },
+              alignItems: "center",
+              gap: 1,
+              py: 2,
+            }}
+          >
+            <Image
+              src="/images/logo.svg"
+              width={30}
+              height={30}
+              alt="logo"
+            ></Image>
+          </Box>
           <Box
             sx={{
               display: { xs: "flex", md: "none" },
               alignItems: "center",
               height: "100%",
-              border: "5px solid red",
             }}
           >
             <DoubleArrowIcon
-              sx={{ color: "gray" }}
+              sx={{
+                color: "white",
+                borderRadius: "5px",
+                padding: "2px 4px",
+                backgroundColor: "gray",
+              }}
               onClick={() => {
                 setShowicon(!showIcon);
               }}
             />
           </Box>
-           
         </Box>
 
         <Box
@@ -286,13 +320,82 @@ export default function CustomizedList({ children }) {
           }}
         >
           <Box sx={{ display: "flex", gap: "15px" }}>
-            <AddIcon />
+            <AddIcon
+              sx={{
+                background: "white",
+                borderRadius: "50%",
+                color: "red",
+                border: "1px solid black",
+              }}
+            />
             <NotificationsNoneOutlinedIcon />
             <ContactlessOutlinedIcon />
           </Box>
-          <AvatarGroup max={4} sx={{ paddingLeft: "15px" }}>
-            <Avatar alt="Remy Sharp" src="/images/nacy.jpg" />
-          </AvatarGroup>
+          <Box sx={{ pl: 1 }}>
+            <Avatar
+              alt="Remy Sharp"
+              src="/images/nacy.jpg"
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            ></Avatar>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={openn}
+              onClose={handleClose}
+              slotProps={{
+                list: {
+                  "aria-labelledby": "basic-button",
+                },
+              }}
+            >
+              <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                  <Avatar alt="Remy Sharp" src="/images/nacy.jpg" />
+                </ListItemAvatar>
+                <ListItemText
+                  primary="Nastaran Mohammadi"
+                  secondary={<React.Fragment>{"Web Designer"}</React.Fragment>}
+                />
+              </ListItem>
+              {data2.map((val, i) => {
+                return (
+                  <ListItem key={i} sx={{ p: 0 }}>
+                    <ListItemButton>
+                      <Box sx={{ color: "#593ae0", scale: "0.8" }}>
+                        {val.icon}
+                      </Box>
+                      <ListItemText
+                        primary={val.label}
+                        primaryTypographyProps={{
+                          fontSize: 15,
+                        }}
+                        sx={{ padding: "0 5px" }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+              <Divider />
+              <ListItem sx={{ p: 0 }}>
+                <ListItemButton>
+                  <Box sx={{ color: "red", scale: "0.8" }}>
+                    <LogoutIcon />
+                  </Box>
+                  <ListItemText
+                    primary="Logut"
+                    primaryTypographyProps={{
+                      fontSize: 15,
+                    }}
+                    sx={{ padding: "0 5px" }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </Menu>
+          </Box>
         </Box>
       </Box>
       {/* <Box sx={{flex:1 ,border:"5px solid green"}}>{children}</Box> */}
