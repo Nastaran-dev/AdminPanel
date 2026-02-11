@@ -45,8 +45,9 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import EditIcon from '@mui/icons-material/Edit';
- import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+
 const data = [
   { icon: <People />, label: "Dashboard" },
   { icon: <DnsIcon />, label: "Employees" },
@@ -71,10 +72,94 @@ const data2 = [
 ];
 
 const peopel = [
-  { title: "new order", info: "10 Aug 2020" },
-  { title: "new order", info: "10 Aug 2020" },
-  { title: "new order", info: "10 Aug 2020" },
-  { title: "new order", info: "10 Aug 2020" },
+  { title: "New order placed..", info: "10 Aug 2020" },
+  { title: "Youtube, a video-sharing ..", info: "10 Aug 2020" },
+  { title: "john just buy your produ..", info: "10 Aug 2020" },
+  { title: "Athan Jacoby", info: "10 Aug 2020" },
+];
+const peopel2 = [
+  {
+    image: "/images/imgi_1_avatar1.webp",
+    title: "David Nester Birthday",
+    info: "Today",
+  },
+  {
+    image: "/images/imgi_2_avatar2.webp",
+    title: "Perfection Simplified",
+    info: "jame smith commented..",
+  },
+  {
+    image: "/images/imgi_3_avatar3.webp",
+    title: "AharlieKane",
+    info: "Sami is online",
+  },
+  {
+    image: "/images/imgi_4_avatar4.webp",
+    title: "Athan Jacoby",
+    info: "Nargis left 30 mins ago",
+  },
+];
+const peopel3 = [
+  {
+    image: "/images/imgi_5_avatar5.webp",
+    title: "Archie Parker",
+    info: "Kalid is online",
+  },
+  {
+    image: "/images/imgi_6_avatar6.webp",
+    title: "Alfie Mason",
+    info: "Taherah left 7 mins ago",
+  },
+  {
+    image: "/images/imgi_7_avatar7.webp",
+    title: "AharlieKane",
+    info: "Sami is online",
+  },
+  {
+    image: "/images/imgi_8_avatar8.webp",
+    title: "Athan Jacoby",
+    info: "Nargis left 30 mins ago",
+  },
+  {
+    image: "/images/imgi_9_avatar9.webp",
+    title: "Athan Jacoby",
+    info: "Nargis left 30 mins ago",
+  },
+  {
+    image: "/images/imgi_10_avatar10.webp",
+    title: "Bashid Samim",
+    info: "Rashid left 50 mins ago",
+  },
+  {
+    image: "/images/imgi_4_avatar4.webp",
+    title: "AharlieKane",
+    info: "Sami is online",
+  },
+  {
+    image: "/images/imgi_1_avatar1.webp",
+    title: "Athan Jacoby",
+    info: "Nargis left 30 mins ago",
+  },
+  {
+    image: "/images/imgi_2_avatar2.webp",
+    title: "Breddie Ronan",
+    info: "Kalid is online",
+  },
+  {
+    image: "/images/imgi_3_avatar3.webp",
+    title: "Ceorge Carson",
+    info: "aherah left 7 mins ago",
+  },
+  {
+    image: "/images/imgi_5_avatar5.webp",
+    title: "Darry Parker",
+    info: "Sami is online",
+  },
+  {
+    image: "/images/imgi_7_avatar7.webp",
+    title: "Denry Hunter",
+    info: "Nargis left 30 mins ago",
+  },
 ];
 const FireNav = styled(List)({
   "& .MuiListItemButton-root": {
@@ -365,7 +450,6 @@ export default function CustomizedList({ children }) {
             sx={{
               display: "flex",
               gap: "15px",
-              border: "1px solid red",
               alignItems: "center",
             }}
           >
@@ -413,7 +497,7 @@ export default function CustomizedList({ children }) {
                     {peopel.map((val) => {
                       return (
                         <>
-                          <Box sx={{display:"flex" , alignItems:"center"}}>
+                          <Box sx={{ display: "flex", alignItems: "center" }}>
                             <ListItem alignItems="flex-start">
                               <ListItemText
                                 primary={val.title}
@@ -422,21 +506,90 @@ export default function CustomizedList({ children }) {
                                 }
                               />
                             </ListItem>
-                            <Box sx={{display:"flex"}}>
-                               <EditIcon sx={{color:"blue"}}/>
-                                <DeleteForeverIcon sx={{color:"red"}}/>
+                            <Box sx={{ display: "flex" }}>
+                              <EditIcon sx={{ color: "blue" }} />
+                              <DeleteForeverIcon sx={{ color: "red" }} />
                             </Box>
-                            
                           </Box>
                         </>
                       );
                     })}
                   </CustomTabPanel>
                   <CustomTabPanel value={value} index={1}>
-                    Item Two
+                    {/* ////////////////////////////////////////////////////////////////////////// */}
+                    <Typography variant="body1" color="initial">
+                      SEVER STATUS
+                    </Typography>
+                    {peopel2.map((val) => {
+                      return (
+                        <>
+                          <Box sx={{ alignItems: "center" }}>
+                            <Box sx={{ display: "flex", gap: "5px", p: 1 }}>
+                              {" "}
+                              <Image
+                                src={val.image}
+                                width={60}
+                                height={5}
+                                alt="logo"
+                                style={{
+                                  objectFit: "cover",
+                                  borderRadius: "50%",
+                                }}
+                              ></Image>
+                              <Box>
+                                <ListItem alignItems="flex-start">
+                                  <ListItemText
+                                    primary={val.title}
+                                    secondary={
+                                      <React.Fragment>
+                                        {val.info}
+                                      </React.Fragment>
+                                    }
+                                  />
+                                </ListItem>
+                              </Box>
+                            </Box>
+                          </Box>
+                        </>
+                      );
+                    })}
                   </CustomTabPanel>
                   <CustomTabPanel value={value} index={2}>
-                    Item Three
+                    <Box sx={{ height: "350px", overflowX: "scroll" }}>
+                      {peopel3.map((val) => {
+                        return (
+                          <>
+                            <Box>
+                              <Box sx={{ display: "flex", gap: "5px", p: 1 }}>
+                                {" "}
+                                <Image
+                                  src={val.image}
+                                  width={60}
+                                  height={5}
+                                  alt="logo"
+                                  style={{
+                                    objectFit: "cover",
+                                    borderRadius: "50%",
+                                  }}
+                                ></Image>
+                                <Box>
+                                  <ListItem alignItems="flex-start">
+                                    <ListItemText
+                                      primary={val.title}
+                                      secondary={
+                                        <React.Fragment>
+                                          {val.info}
+                                        </React.Fragment>
+                                      }
+                                    />
+                                  </ListItem>
+                                </Box>
+                              </Box>
+                            </Box>
+                          </>
+                        );
+                      })}
+                    </Box>
                   </CustomTabPanel>
                 </Box>
               )}
