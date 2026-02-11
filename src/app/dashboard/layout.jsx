@@ -71,11 +71,11 @@ const FireNav = styled(List)({
 });
 export default function CustomizedList({ children }) {
   const theme = useTheme();
-  const Islaptop = useMediaQuery(theme.breakpoints.up("md"));
+  const Islaptop = useMediaQuery(theme.breakpoints.up("md") ,{noSsr:true});
   const [showIcon, setShowicon] = useState(Islaptop);
   const [open, setOpen] = React.useState(true);
   useEffect(() => {
-    Islaptop && setShowicon(Islaptop);
+      setShowicon(Islaptop);
   }, [Islaptop]);
 
   return (
