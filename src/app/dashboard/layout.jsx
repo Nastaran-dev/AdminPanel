@@ -47,7 +47,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-
+import DarkModeToggle from "../ToggleBtn/ToggleBtn";
 const data = [
   { icon: <People />, label: "Dashboard" },
   { icon: <DnsIcon />, label: "Employees" },
@@ -523,7 +523,7 @@ export default function CustomizedList({ children }) {
                     {peopel2.map((val) => {
                       return (
                         <>
-                          <Box sx={{ alignItems: "center" }}>
+                          <Box key={val.info} sx={{ alignItems: "center" }}>
                             <Box sx={{ display: "flex", gap: "5px", p: 1 }}>
                               {" "}
                               <Image
@@ -559,7 +559,7 @@ export default function CustomizedList({ children }) {
                       {peopel3.map((val) => {
                         return (
                           <>
-                            <Box>
+                            <Box key={val.info}>
                               <Box sx={{ display: "flex", gap: "5px", p: 1 }}>
                                 {" "}
                                 <Image
@@ -594,8 +594,7 @@ export default function CustomizedList({ children }) {
                 </Box>
               )}
             </Box>
-            <ContactlessOutlinedIcon />
-
+            <DarkModeToggle/>
             <Box sx={{ pl: 1 }}>
               <Avatar
                 alt="Remy Sharp"
