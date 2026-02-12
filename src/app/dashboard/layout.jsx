@@ -226,7 +226,7 @@ export default function CustomizedList({ children }) {
   };
   const [List, setList] = useState(false);
   return (
-    <Box sx={{ display: "flex", width: "100%", position: "sticky", top: 0 }}>
+    <Box sx={{ display: "flex", width: "100%", position:"sticky", top: 0 }}>
       <ThemeProvider
         theme={createTheme({
           components: {
