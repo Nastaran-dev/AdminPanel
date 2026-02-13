@@ -235,6 +235,8 @@ export default function CustomizedList({ children }) {
   const getLinkStyle=(href)=>{
     const isActive = pathname===href;
     return{
+      borderRadius:"20px",
+      margin:"0px 10px",
       backgroundColor: isActive ? (dark ? "gray" : "lightgray") : "transparent",
       color: isActive ? (dark ? "white" : "black") : (dark ? "gray" : "black"),
       transition: "background-color 0.3s ease, color 0.3s ease",
@@ -246,7 +248,7 @@ export default function CustomizedList({ children }) {
       sx={{
         display: "flex",
         minHeight: "100vh",
-        backgroundColor: dark ? "black" : "white",
+        backgroundColor: "black"
       }}
     >
       <Box
@@ -271,8 +273,8 @@ export default function CustomizedList({ children }) {
           sx={{
             maxWidth: 256,
             width: 240,
-            backgroundColor: dark ? "black" : "white",
-            border:"1px solid gray"
+            backgroundColor:"#0a0d10",
+           
           }}
         >
           
@@ -320,7 +322,7 @@ export default function CustomizedList({ children }) {
                   <ListItemText
                     primary="Project overview"
                     primaryTypographyProps={{
-                      color: dark ? " white" : "black",
+                      color: "#969fb5"
                     }}
                   />
                 </ListItemIcon>
@@ -343,7 +345,7 @@ export default function CustomizedList({ children }) {
                 <ListItemText
                   primary="YOUR COMPANY"
                   primaryTypographyProps={{
-                    color: dark ? " white" : "black",
+                    color: "#969fb5",
                     fontSize: 15,
                     lineHeight: "20px",
                     mb: "2px",
@@ -378,8 +380,10 @@ export default function CustomizedList({ children }) {
                     <ListItemText
                       primary={item.label}
                       primaryTypographyProps={{
-                        fontSize: 15,
-                      }}
+                    color: "#969fb5",
+                    fontSize: 15,
+                    
+                  }}
                     />
                   </ListItemButton>
                 ))}
@@ -413,6 +417,10 @@ export default function CustomizedList({ children }) {
           flexGrow: 1,
           display: "flex",
           flexDirection: "column",
+         
+          m:2,
+          borderRadius:"20px",
+          backgroundColor:dark?"#15181d":"white"
         }}
       >
         <Box
