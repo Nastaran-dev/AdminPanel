@@ -37,7 +37,6 @@ import { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import Typography from "@mui/material/Typography";
-import AddIcon from "@mui/icons-material/Add";
 import Menu from "@mui/material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -48,6 +47,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import DarkModeToggle from "../ToggleBtn/ToggleBtn";
 import Link from "next/link";
+import { myTheme } from "../store/Store";
 const data = [
   { icon: <People />, label: "Dashboard", href: "/dashboard" },
   { icon: <DnsIcon />, label: "Employees", href: "/dashboard/Empliyees" },
@@ -177,19 +177,6 @@ const peopel3 = [
     info: "Nargis left 30 mins ago",
   },
 ];
-const FireNav = styled(List)({
-  "& .MuiListItemButton-root": {
-    paddingLeft: 24,
-    paddingRight: 24,
-  },
-  "& .MuiListItemIcon-root": {
-    minWidth: 0,
-    marginRight: 16,
-  },
-  "& .MuiSvgIcon-root": {
-    fontSize: 20,
-  },
-});
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -220,6 +207,7 @@ function a11yProps(index) {
 }
 
 export default function CustomizedList({ children }) {
+  const { dark } = React.useContext(myTheme);
   const theme = useTheme();
   const Islaptop = useMediaQuery(theme.breakpoints.up("md"), { noSsr: true });
   const [showIcon, setShowicon] = useState(Islaptop);
@@ -242,169 +230,175 @@ export default function CustomizedList({ children }) {
   };
   const [List, setList] = useState(false);
   return (
-    <Box sx={{ display: "flex", minHeight: "100vh" }}>
-      <ThemeProvider
-        theme={createTheme({
-          components: {
-            MuiListItemButton: {
-              defaultProps: {
-                disableTouchRipple: true,
-              },
-            },
-          },
-          palette: {
-            mode: "dark",
-            primary: { main: "#fff" },
-            background: { paper: "#15181d" },
-          },
-        })}
+    <Box
+      sx={{
+        display: "flex",
+        minHeight: "100vh",
+        backgroundColor: dark ? "black" : "white",
+      }}
+    >
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          zIndex: "999",
+        }}
       >
-        <Box
+        <DoubleArrowIcon
+          sx={{ color: "gray" }}
+          onClick={() => {
+            setShowicon(!showIcon);
+          }}
+        />
+      </Box>
+      {showIcon && (
+        <Paper
+          elevation={0}
           sx={{
-            display: { xs: "none", md: "flex" },
-            position: "absolute",
-            top: "20px",
-            left: "20px",
-            zIndex: "999",
+            maxWidth: 256,
+            width: 240,
+            backgroundColor: dark ? "black" : "white",
+            border:"1px solid gray"
           }}
         >
-          <DoubleArrowIcon
-            sx={{ color: "gray" }}
-            onClick={() => {
-              setShowicon(!showIcon);
-            }}
-          />
-        </Box>
-        {showIcon && (
-          <Paper elevation={0} sx={{ maxWidth: 256, width: 240 }}>
-            <FireNav component="nav" disablePadding>
-              <ListItemButton component="a" href="#customized-list">
-                <Box
+          
+            <ListItemButton component="a" href="#customized-list">
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+
+                  gap: 1,
+                  py: 2,
+                  px: 3,
+                }}
+              >
+                <Image
+                  src="/images/logo.svg"
+                  width={50}
+                  height={50}
+                  alt="logo"
+                ></Image>
+                <ListItemText
+                  primary="HexaBox"
+                  primaryTypographyProps={{
+                    color: dark ? " white" : "black",
+                    fontWeight: "medium",
+                    variant: "h5",
+                  }}
+                />
+              </Box>
+            </ListItemButton>
+            <Divider />
+            <ListItem component="div" disablePadding>
+              <ListItemButton
+                sx={{ display: "flex", alignItems: "center", gap: 1 }}
+              >
+                <ListItemIcon
                   sx={{
                     display: "flex",
                     alignItems: "center",
-
                     gap: 1,
-                    py: 2,
-                    px: 3,
+                    height: "100%",
                   }}
                 >
-                  <Image
-                    src="/images/logo.svg"
-                    width={50}
-                    height={50}
-                    alt="logo"
-                  ></Image>
+                  <Home style={{ color: "#969fb5" }} />
                   <ListItemText
-                    primary="HexaBox"
+                    primary="Project overview"
                     primaryTypographyProps={{
-                      color: "primary",
-                      fontWeight: "medium",
-                      variant: "h5",
+                      color: dark ? " white" : "black",
                     }}
                   />
-                </Box>
+                </ListItemIcon>
               </ListItemButton>
-              <Divider />
-              <ListItem component="div" disablePadding>
-                <ListItemButton
-                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                >
-                  <ListItemIcon
+              <Tooltip title="Project Settings">
+                <IconButton size="large">
+                  <Settings />
+                  <ArrowRight
+                    sx={{ position: "absolute", right: 4, opacity: 0 }}
+                  />
+                </IconButton>
+              </Tooltip>
+            </ListItem>
+            <Divider />
+            <Box>
+              <ListItemButton
+                alignItems="flex-start"
+                onClick={() => setOpen(!open)}
+              >
+                <ListItemText
+                  primary="YOUR COMPANY"
+                  primaryTypographyProps={{
+                    color: dark ? " white" : "black",
+                    fontSize: 15,
+                    lineHeight: "20px",
+                    mb: "2px",
+                  }}
+                  secondary="Authentication, Firestore Database"
+                  secondaryTypographyProps={{
+                    noWrap: true,
+                    fontSize: 16,
+                    lineHeight: "16px",
+                    color: open ? "rgba(0,0,0,0)" : "rgba(255,255,255,0.5)",
+                  }}
+                  sx={{ my: 0 }}
+                />
+              </ListItemButton>
+              {open &&
+                data.map((item) => (
+                  <ListItemButton
+                    key={item.label}
+                    component={Link}
+                    href={item.href}
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 1,
-                      height: "100%",
+                      py: 0,
+                      minHeight: 55,
+                      color: dark ? "white" : "black",
                     }}
                   >
-                    <Home color="primary" />
-                    <ListItemText primary="Project overview" />
-                  </ListItemIcon>
-                </ListItemButton>
-                <Tooltip title="Project Settings">
-                  <IconButton size="large">
-                    <Settings />
-                    <ArrowRight
-                      sx={{ position: "absolute", right: 4, opacity: 0 }}
+                    <ListItemIcon sx={{ color: "#969fb5" }}>
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.label}
+                      primaryTypographyProps={{
+                        fontSize: 15,
+                      }}
                     />
-                  </IconButton>
-                </Tooltip>
-              </ListItem>
-              <Divider />
-              <Box>
-                <ListItemButton
-                  alignItems="flex-start"
-                  onClick={() => setOpen(!open)}
-                >
-                  <ListItemText
-                    primary="YOUR COMPANY"
-                    primaryTypographyProps={{
-                      fontSize: 15,
-                      lineHeight: "20px",
-                      mb: "2px",
-                    }}
-                    secondary="Authentication, Firestore Database"
-                    secondaryTypographyProps={{
-                      noWrap: true,
-                      fontSize: 16,
-                      lineHeight: "16px",
-                      color: open ? "rgba(0,0,0,0)" : "rgba(255,255,255,0.5)",
-                    }}
-                    sx={{ my: 0 }}
-                  />
-                </ListItemButton>
-                {open &&
-                  data.map((item) => (
-                    <ListItemButton
-                      key={item.label}
-                      component={Link}
-                      href={item.href}
-                      sx={{ py: 0, minHeight: 55, color: "white" }}
-                    >
-                      <ListItemIcon sx={{ color: "#969fb5" }}>
-                        {item.icon}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={item.label}
-                        primaryTypographyProps={{
-                          fontSize: 15,
-                        }}
-                      />
-                    </ListItemButton>
-                  ))}
-                <Box
+                  </ListItemButton>
+                ))}
+              <Box
+                sx={{
+                  width: "100%",
+                  justifyContent: "center",
+                  padding: "5px 10px",
+                }}
+              >
+                <Button
+                  variant="contained"
                   sx={{
                     width: "100%",
-                    justifyContent: "center",
-                    padding: "5px 10px",
+                    backgroundColor: "#08a36b",
+                    color: "white",
                   }}
+                  endIcon={<ArrowForwardIcon />}
+                  disableElevation
                 >
-                  <Button
-                    variant="contained"
-                    sx={{
-                      width: "100%",
-                      backgroundColor: "#08a36b",
-                      color: "white",
-                    }}
-                    endIcon={<ArrowForwardIcon />}
-                    disableElevation
-                  >
-                    Disable elevation
-                  </Button>
-                </Box>
+                  Disable elevation
+                </Button>
               </Box>
-            </FireNav>
-          </Paper>
-        )}
-      </ThemeProvider>
+            </Box>
+         
+        </Paper>
+      )}
       {/* menu mobile */}
       <Box
         sx={{
           flexGrow: 1,
           display: "flex",
           flexDirection: "column",
-         
         }}
       >
         <Box
@@ -415,59 +409,62 @@ export default function CustomizedList({ children }) {
             height: "60px",
             padding: "0px 10px",
             width: "100%",
-           borderBottom: "1px solid gray ",
-           
+            borderBottom: "1px solid gray ",
           }}
         >
           <Typography
-            sx={{ padding: "10px 40px", display: { xs: "none", md: "flex" } }}
+            sx={{
+              padding: "10px 40px",
+              display: { xs: "none", md: "flex" },
+              color: dark ? "white" : "black",
+            }}
           >
             eCommerce Dashboard
           </Typography>
-          <Box sx={{display:"flex" , gap:1 , alignItems:"center"}}> <Box
-            sx={{
-              display: { md: "none" },
-              alignItems: "center",
-              gap: 1,
-              py: 2,
-            
-            }}
-          >
-            <Image
-              src="/images/logo.svg"
-              width={30}
-              height={30}
-              alt="logo"
-            ></Image>
-          </Box>
-          <Box
-            sx={{
-              display: { xs: "flex", md: "none" },
-              alignItems: "center",
-              height: "100%",
-             
-            }}
-          >
-            <DoubleArrowIcon
+          <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+            {" "}
+            <Box
               sx={{
-                color: "white",
-                borderRadius: "5px",
-                padding: "2px 4px",
-                backgroundColor: "gray",
+                display: { md: "none" },
+                alignItems: "center",
+                gap: 1,
+                py: 2,
               }}
-              onClick={() => {
-                setShowicon(!showIcon);
+            >
+              <Image
+                src="/images/logo.svg"
+                width={30}
+                height={30}
+                alt="logo"
+              ></Image>
+            </Box>
+            <Box
+              sx={{
+                display: { xs: "flex", md: "none" },
+                alignItems: "center",
+                height: "100%",
               }}
-            />
-          </Box></Box>
-         
+            >
+              <DoubleArrowIcon
+                sx={{
+                  color: "white",
+                  borderRadius: "5px",
+                  padding: "2px 4px",
+                  backgroundColor: "gray",
+                }}
+                onClick={() => {
+                  setShowicon(!showIcon);
+                }}
+              />
+            </Box>
+          </Box>
+
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-end",
               gap: { md: "20px" },
-             
             }}
           >
             <Box
@@ -477,7 +474,6 @@ export default function CustomizedList({ children }) {
                 alignItems: "center",
               }}
             >
-             
               <Box
                 sx={{
                   display: "flex",
@@ -487,6 +483,7 @@ export default function CustomizedList({ children }) {
               >
                 {" "}
                 <NotificationsNoneOutlinedIcon
+                  style={{ color: dark ? "white" : "black" }}
                   onClick={() => {
                     setList(!List);
                   }}
@@ -498,7 +495,7 @@ export default function CustomizedList({ children }) {
                       top: "60px",
                       right: 0,
                       zIndex: 999,
-                      backgroundColor: "white",
+                      backgroundColor: dark ? "black" : "white",
                     }}
                   >
                     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -507,9 +504,36 @@ export default function CustomizedList({ children }) {
                         onChange={handleChange}
                         aria-label="basic tabs example"
                       >
-                        <Tab label="Notes" {...a11yProps(0)} />
-                        <Tab label="Alerts" {...a11yProps(1)} />
-                        <Tab label="Chats" {...a11yProps(2)} />
+                        <Tab
+                          label="Notes"
+                          sx={{
+                            color: "gray ",
+                            "&.Mui-selected": {
+                              color:dark?"white":"blue",
+                            },
+                          }}
+                          {...a11yProps(0)}
+                        />
+                        <Tab
+                          label="Alerts"
+                          sx={{
+                            color: "gray",
+                            "&.Mui-selected": {
+                               color:dark?"white":"blue",
+                            },
+                          }}
+                          {...a11yProps(1)}
+                        />
+                        <Tab
+                          label="Chats"
+                          sx={{
+                            color: "gray",
+                            "&.Mui-selected": {
+                               color:dark?"white":"blue",
+                            },
+                          }}
+                          {...a11yProps(2)}
+                        />
                       </Tabs>
                     </Box>
                     <CustomTabPanel sx={{ p: 0 }} value={value} index={0}>
@@ -520,13 +544,15 @@ export default function CustomizedList({ children }) {
                               key={val.id}
                               sx={{ display: "flex", alignItems: "center" }}
                             >
-                              <ListItem alignItems="flex-start">
+                              <ListItem  alignItems="flex-start" sx={{display:"flex" , flexDirection:"column" , alignItems:"center"}} >
                                 <ListItemText
                                   primary={val.title}
-                                  secondary={
-                                    <React.Fragment>{val.info}</React.Fragment>
-                                  }
+                                  primaryTypographyProps={{
+                                    color: dark ? "white" : "black",
+                                  }}
+                                 
                                 />
+                                <Typography sx={{ color: dark ? "white" : "black",}}>{val.info}</Typography>
                               </ListItem>
                               <Box sx={{ display: "flex" }}>
                                 <EditIcon sx={{ color: "blue" }} />
@@ -539,7 +565,7 @@ export default function CustomizedList({ children }) {
                     </CustomTabPanel>
                     <CustomTabPanel value={value} index={1}>
                       {/* ////////////////////////////////////////////////////////////////////////// */}
-                      <Typography variant="body1" color="initial">
+                      <Typography variant="body1" color="initial" sx={{ color: dark ? "white" : "black",}}>
                         SEVER STATUS
                       </Typography>
                       {peopel2.map((val) => {
@@ -559,15 +585,15 @@ export default function CustomizedList({ children }) {
                                   }}
                                 ></Image>
                                 <Box>
-                                  <ListItem alignItems="flex-start">
+                                  <ListItem alignItems="flex-start" sx={{display:"flex" , flexDirection:"column"}}>
                                     <ListItemText
                                       primary={val.title}
-                                      secondary={
-                                        <React.Fragment>
-                                          {val.info}
-                                        </React.Fragment>
-                                      }
+                                       primaryTypographyProps={{
+                                    color: dark ? "white" : "black",
+                                  }}
+                                      
                                     />
+                                     <Typography sx={{ color: dark ? "white" : "black",}}>{val.info}</Typography>
                                   </ListItem>
                                 </Box>
                               </Box>
@@ -595,15 +621,15 @@ export default function CustomizedList({ children }) {
                                     }}
                                   ></Image>
                                   <Box>
-                                    <ListItem alignItems="flex-start">
+                                    <ListItem alignItems="flex-start" sx={{display:"flex" ,flexDirection:"column"}}>
                                       <ListItemText
                                         primary={val.title}
-                                        secondary={
-                                          <React.Fragment>
-                                            {val.info}
-                                          </React.Fragment>
-                                        }
+                                          primaryTypographyProps={{
+                                    color: dark ? "white" : "black",
+                                  }}
+                                        
                                       />
+                                       <Typography sx={{ color: dark ? "white" : "black",}}>{val.info}</Typography>
                                     </ListItem>
                                   </Box>
                                 </Box>
@@ -632,56 +658,67 @@ export default function CustomizedList({ children }) {
                   anchorEl={anchorEl}
                   open={openn}
                   onClose={handleClose}
-                  slotProps={{
-                    list: {
-                      "aria-labelledby": "basic-button",
-                    },
-                  }}
                 >
-                  <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                      <Avatar alt="Remy Sharp" src="/images/nacy.jpg" />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="Nastaran Mohammadi"
-                      secondary={
-                        <React.Fragment>{"Web Designer"}</React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                  {data2.map((val, i) => {
-                    return (
-                      <ListItem key={i} sx={{ p: 0 }}>
-                        <ListItemButton>
-                          <Box sx={{ color: "#593ae0", scale: "0.8" }}>
-                            {val.icon}
-                          </Box>
-                          <ListItemText
-                            primary={val.label}
-                            primaryTypographyProps={{
-                              fontSize: 15,
-                            }}
-                            sx={{ padding: "0 5px" }}
-                          />
-                        </ListItemButton>
-                      </ListItem>
-                    );
-                  })}
-                  <Divider />
-                  <ListItem sx={{ p: 0 }}>
-                    <ListItemButton>
-                      <Box sx={{ color: "red", scale: "0.8" }}>
-                        <LogoutIcon />
-                      </Box>
+                  <Box
+                    sx={{
+                      backgroundColor: dark ? "black" : "white",
+                      p: 0,
+                      m: 0,
+                    }}
+                  >
+                    {" "}
+                    <ListItem alignItems="flex-start">
+                      <ListItemAvatar>
+                        <Avatar alt="Remy Sharp" src="/images/nacy.jpg" />
+                      </ListItemAvatar>
                       <ListItemText
-                        primary="Logut"
+                        primary="Nastaran Mohammadi"
                         primaryTypographyProps={{
-                          fontSize: 15,
+                          color: dark ? "white" : "black",
                         }}
-                        sx={{ padding: "0 5px" }}
+                        pink={
+                          <span style={{ color: dark ? "white" : "black" }}>
+                            {"Web Designer"}
+                          </span>
+                        }
                       />
-                    </ListItemButton>
-                  </ListItem>
+                    </ListItem>
+                    {data2.map((val, i) => {
+                      return (
+                        <ListItem key={i} sx={{ p: 0 }}>
+                          <ListItemButton>
+                            <Box sx={{ color: "#593ae0", scale: "0.8" }}>
+                              {val.icon}
+                            </Box>
+                            <ListItemText
+                              primary={val.label}
+                              primaryTypographyProps={{
+                                color: dark ? "white" : "black",
+                                fontSize: 15,
+                              }}
+                              sx={{ padding: "0 5px" }}
+                            />
+                          </ListItemButton>
+                        </ListItem>
+                      );
+                    })}
+                    <Divider />
+                    <ListItem sx={{ p: 0 }}>
+                      <ListItemButton>
+                        <Box sx={{ color: "red", scale: "0.8" }}>
+                          <LogoutIcon />
+                        </Box>
+                        <ListItemText
+                          primary="Logut"
+                          primaryTypographyProps={{
+                            color: dark ? "white" : "black",
+                            fontSize: 15,
+                          }}
+                          sx={{ padding: "0 5px" }}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  </Box>
                 </Menu>
               </Box>
             </Box>
