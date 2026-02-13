@@ -48,20 +48,21 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import DarkModeToggle from "../ToggleBtn/ToggleBtn";
 import Link from "next/link";
 import { myTheme } from "../store/Store";
+import { usePathname } from "next/navigation";
 const data = [
   { icon: <People />, label: "Dashboard", href: "/dashboard" },
   { icon: <DnsIcon />, label: "Employees", href: "/dashboard/Empliyees" },
-  { icon: <PermMedia />, label: "Core Hr", href: "/dashboard" },
-  { icon: <Public />, label: "Finance", href: "/dashboard" },
-  { icon: <AutoStoriesIcon />, label: "Task", href: "/dashboard" },
-  { icon: <AvTimerIcon />, label: "Performance", href: "/dashboard" },
-  { icon: <PermMedia />, label: "Projects", href: "/dashboard" },
-  { icon: <BarChartIcon />, label: "Reports", href: "/dashboard" },
-  { icon: <BlurOnIcon />, label: "Manage Clients", href: "/dashboard" },
-  { icon: <Brightness5Icon />, label: "Blog", href: "/dashboard" },
-  { icon: <BusAlertIcon />, label: "Apps", href: "/dashboard" },
-  { icon: <CachedIcon />, label: "Profile", href: "/dashboard" },
-  { icon: <CameraFrontIcon />, label: "Account", href: "/dashboard" },
+  { icon: <PermMedia />, label: "Core Hr", href: "/dashboard/Corehr" },
+  { icon: <Public />, label: "Finance", href: "/dashboard/Finance" },
+  { icon: <AutoStoriesIcon />, label: "Task", href: "/dashboard/Task" },
+  { icon: <AvTimerIcon />, label: "Performance", href: "/" },
+  { icon: <PermMedia />, label: "Projects", href: "/" },
+  { icon: <BarChartIcon />, label: "Reports", href: "/" },
+  { icon: <BlurOnIcon />, label: "Manage Clients", href: "/" },
+  { icon: <Brightness5Icon />, label: "Blog", href: "/" },
+  { icon: <BusAlertIcon />, label: "Apps", href: "/" },
+  { icon: <CachedIcon />, label: "Profile", href: "/" },
+  { icon: <CameraFrontIcon />, label: "Account", href: "/" },
 ];
 const data2 = [
   { icon: <People />, label: "Profile" },
@@ -229,6 +230,17 @@ export default function CustomizedList({ children }) {
     setValue(newValue);
   };
   const [List, setList] = useState(false);
+  // ////////////////////////////////////////////////////////////////pathname
+  const pathname = usePathname()
+  const getLinkStyle=(href)=>{
+    const isActive = pathname===href;
+    return{
+      backgroundColor: isActive ? (dark ? "gray" : "lightgray") : "transparent",
+      color: isActive ? (dark ? "white" : "black") : (dark ? "gray" : "black"),
+      transition: "background-color 0.3s ease, color 0.3s ease",
+    }
+
+  }
   return (
     <Box
       sx={{
@@ -351,7 +363,9 @@ export default function CustomizedList({ children }) {
                   <ListItemButton
                     key={item.label}
                     component={Link}
+
                     href={item.href}
+                    style={getLinkStyle(item.href)}
                     sx={{
                       py: 0,
                       minHeight: 55,
