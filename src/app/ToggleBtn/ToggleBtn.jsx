@@ -3,8 +3,6 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import { useColorMode } from '../context/themeContext';
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -63,15 +61,13 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 
 export default function DarkModeToggle() {
-    const colorMode =  useColorMode();
     const theme= useTheme();
   return (
     <FormGroup>
       <FormControlLabel
-      onChange={colorMode.toggleColorMode}
         control={<MaterialUISwitch  defaultChecked />}
       />
-      <Stack direction="row" spacing={1} sx={{ alignItems: 'center' , backgroundColor:"red" }} onClick={colorMode.toggleColorMode}>
+      <Stack direction="row" spacing={1} sx={{ alignItems: 'center' , backgroundColor:"red" }}>
 
       </Stack>
     </FormGroup>
