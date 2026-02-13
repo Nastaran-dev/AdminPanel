@@ -9,6 +9,8 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";   
+import Input from '@mui/material/Input';
+import InputBase from '@mui/material/InputBase';
 export default function GroupAvatars() {
   const { dark } = useContext(myTheme);
     const [age, setAge] =useState("Monthly");
@@ -33,6 +35,9 @@ export default function GroupAvatars() {
       borderRadius: "10px",
       gap: "20px",
     },
+    Style3:{
+      width:{xs:"25px" , md:"40px"} , height:80 , backgroundColor:"#9278fe"  ,outline:"none" , "&.Mui-focused":{backgroundColor:"#7258de"} , borderRadius:"3px" , caretColor:"transparent", outline:"none"
+    }
   };
 
   return (
@@ -41,7 +46,7 @@ export default function GroupAvatars() {
         <Box
           sx={{
             width: { xs: "50%", md: "20%" },
-            backgroundColor: "red",
+           
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -49,26 +54,25 @@ export default function GroupAvatars() {
           }}
         >
           <Box>
-            <Typography sx={{ color: "white", fontWeight: "bold" }}>
+            <Typography sx={{ color: "white", fontWeight: "bold" , fontSize:{xs:"20px" , sm:"30px"} }}>
               Revenue
             </Typography>
-            <Typography sx={{ color: "white", fontWeight: "bold" }}>
+            <Typography sx={{ color: "white", fontWeight: "bold" , fontSize:{xs:"25px" , sm:"40px"} }}>
               $34,129.03
             </Typography>
           </Box>
-          <Typography sx={{ color: "white", fontWeight: "bold" }}>
+          <Typography sx={{ color: "white", fontWeight: "bold" ,fontSize:{xs:"14px" , sm:"12.5px"} }}>
             +8.50% prev month
           </Typography>
         </Box>
-        <Box sx={{ width: { xs: "50%", md: "20%" } }}>
-          <Box sx={{ minWidth: 120 ,backgroundColor: dark ? "#1e1e1e" : "#ffffff" , borderRadius: "20px",overflow:"hidden"}}>
+        <Box sx={{ width: { xs: "50%", md: "20%" } , display:"flex" , flexDirection:"column" , justifyContent:"space-between" }}>
+          <Box sx={{  backgroundColor: dark ? "#1e1e1e" : "#ffffff" , borderRadius: "20px",overflow:"hidden"}}>
             <FormControl fullWidth >
               <Select
-                sx={{ color:dark?"white":"black"  }} 
-                  onChange={(event)=> setAge(event.target.value)}
+                onChange={(event)=> setAge(event.target.value)}
                 value={age}
-                // eslint-disable-next-line react/jsx-no-duplicate-props
                 sx={{
+                  p:0,
                   color:dark?"white":"black",
                   "& .MuiSelect-icon":{
                     color:dark?"white":"black"
@@ -80,6 +84,12 @@ export default function GroupAvatars() {
                 <MenuItem value="Yearly">Yearly</MenuItem>
               </Select>
             </FormControl>
+          </Box>
+          <Box sx={{display:"flex" , gap:"5px" , rotate:"180deg" , justifyContent:"center"}}>
+           <InputBase sx={{...Style.Style3 , height:90}}></InputBase>
+           <InputBase sx={{...Style.Style3 , height:30}}></InputBase>
+           <InputBase sx={{...Style.Style3 , height:60 , backgroundColor:"#fff"}}></InputBase>
+           <InputBase sx={{...Style.Style3 , height:80}}></InputBase>
           </Box>
         </Box>
       </Box>
