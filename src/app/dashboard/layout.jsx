@@ -747,7 +747,7 @@ export default function CustomizedList({ children }) {
           </Box>
         </Box>
 
-        <Box sx={{ flexGrow: 1, p: 3 }}>{children}</Box>
+        <Box sx={{ flexGrow: 1 , p:1}}>{children}</Box>
       </Box>
     </Box>
   );
