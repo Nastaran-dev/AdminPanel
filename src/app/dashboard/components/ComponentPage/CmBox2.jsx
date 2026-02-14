@@ -4,19 +4,12 @@ import Box from "@mui/material/Box";
 import { myTheme } from "../../../store/Store";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import DownloadIcon from '@mui/icons-material/Download';
-import { BarChart } from '@mui/x-charts/BarChart';
+import DownloadIcon from "@mui/icons-material/Download";
+import { BarChart } from "@mui/x-charts/BarChart";
+
 const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
 const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-const xLabels = [
-  'Sun',
-  'Mon',
-  'Tue',
-  'Wed',
-  'Thu',
-  'Fri',
-  'Sat',
-];
+const xLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export default function CmBox2() {
   const { dark } = useContext(myTheme);
   return (
@@ -34,7 +27,7 @@ export default function CmBox2() {
           width: {
             xs: "100%",
             md: "70%",
-            height: "500px",
+            height: "675px",
             backgroundColor: "red",
             borderRadius: "10px",
             backgroundColor: dark ? "#1e2126" : "white",
@@ -42,14 +35,20 @@ export default function CmBox2() {
           },
         }}
       >
-        <Box sx={{ display: "flex", justifyContent: "space-between", p:{xs:1 , md:3} }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            p: { xs: 1, md: 3 },
+          }}
+        >
           <Box>
             <Typography
               sx={{
                 fontSize: {
                   xs: "17px",
-                  sm:"30px",
-                 
+                  sm: "30px",
+
                   color: dark ? "white" : "black",
                   marginTop: "10px",
                 },
@@ -65,34 +64,136 @@ export default function CmBox2() {
                 flexDirection: "column",
               }}
             >
-              <Typography sx={{ color: "gray"}}>Income</Typography>
-              <Box sx={{display:"flex"  , gap:"10px"}}> <Typography sx={{ color: dark ? "white" : "black",fontSize:{xs:"20px",sm:"35px"}  }}>
-                $20,687.69
-               
-              </Typography>
-               <Typography sx={{ color: "green", fontSize:{sm:"20px"} }}>
+              <Typography sx={{ color: "gray" }}>Income</Typography>
+              <Box sx={{ display: "flex", gap: "10px" }}>
+                {" "}
+                <Typography
+                  sx={{
+                    color: dark ? "white" : "black",
+                    fontSize: { xs: "20px", sm: "35px" },
+                  }}
+                >
+                  $20,687.69
+                </Typography>
+                <Typography sx={{ color: "green", fontSize: { sm: "20px" } }}>
                   +8.50%
-                </Typography></Box>
-             
+                </Typography>
+              </Box>
             </Box>
           </Box>
-          <Box sx={{display:"flex" , alignItems:"flex-start" , }}><Button sx={{backgroundColor:dark?"#332855":"#c8deff",color:"#273bcc",padding:{sm:"10px 30px"} , "&:hover":{backgroundColor:"#633dfe"}}} variant="outlined" startIcon={<DownloadIcon />}>
-            Download
-          </Button></Box>
-          
+          <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+            <Button
+              sx={{
+                backgroundColor: dark ? "#332855" : "#c8deff",
+                color: "#273bcc",
+                padding: { sm: "10px 30px" },
+                "&:hover": { backgroundColor: "#633dfe" },
+              }}
+              variant="outlined"
+              startIcon={<DownloadIcon />}
+            >
+              Download
+            </Button>
+          </Box>
         </Box>
         {/* ///////////////////////////////////////////////////////////////////////// */}
-          <Box sx={{ width: '100%', height: 300 }}>
-      <BarChart
-     
-        series={[
-          { data: pData, label: 'pv', id: 'pvId' },
-          { data: uData, label: 'uv', id: 'uvId' },
-        ]}
-        xAxis={[{ data: xLabels, height: 28,tickLabelStyle:{fill:dark?"white":"black",backgroundColor:"black"} }]}
-        yAxis={[{ width: 50 ,tickLabelStyle:{fill:dark?"white":"black"}}]}
-      />
-    </Box>
+        <Box sx={{ width: "100%", height: 300 }}>
+          <BarChart
+            series={[
+              { data: pData, label: "pv", id: "pvId" },
+              { data: uData, label: "uv", id: "uvId" },
+            ]}
+            xAxis={[
+              {
+                data: xLabels,
+                height: 28,
+                tickLabelStyle: {
+                  fill: dark ? "white" : "black",
+                  backgroundColor: "black",
+                },
+              },
+            ]}
+            yAxis={[
+              { width: 50, tickLabelStyle: { fill: dark ? "white" : "black" } },
+            ]}
+          />
+        </Box>
+        <Box sx={{ display: "flex", justifyContent:"space-evenly" , flexWrap:"wrap", m:1 }}>
+          <Box
+            sx={{
+              width: { xs: "47%", md: "30%" },
+              border: "1px solid gray",
+              borderRadius: "10px",
+              
+              p: 1.5,
+            }}
+          >
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              <Typography variant="body1" color="initial"  sx={{color:"gray"}}>
+                Total Revenue
+              </Typography>
+              <Typography
+                variant="body1"
+                color="initial"
+                sx={{ fontWeight: "600",color:dark?"white":"black"  }}
+              >
+                $201,843.52
+              </Typography>
+            </Box>
+            <Typography variant="body1" color="initial" sx={{ color: "green" }}>
+              +6.32%
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              width: { xs: "47%", md: "30%" },
+              border: "1px solid gray",
+              borderRadius: "10px",
+              p: 1.5,
+            }}
+          >
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              <Typography variant="body1" color="initial" sx={{color:"gray"}}>
+                Total Revenue 
+              </Typography>
+              <Typography
+                variant="body1"
+                color="initial"
+                sx={{ fontWeight: "600" , color:dark?"white":"black"  }}
+              >
+                $201,843.52
+              </Typography>
+            </Box>
+            <Typography variant="body1" color="initial" sx={{ color: "green" , fontWeight:"600" }}>
+              +6.32%
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              width: { xs: "100%", md: "30%" },
+              border: "1px solid gray",
+              marginTop:{xs:"10px",md:"0px"},
+              borderRadius: "10px",
+              p: 1.5,
+            }}
+          >
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              <Typography variant="body1" color="initial "  sx={{color:"gray"}}>
+                Total Revenue
+              </Typography>
+              <Typography
+                variant="body1"
+                color="initial"
+                sx={{ fontWeight: "600",color:dark?"white":"black"  }}
+              >
+                $201,843.52
+              </Typography>
+            </Box>
+            <Typography variant="body1" color="initial" sx={{ color: "green" }}>
+              +6.32%
+            </Typography>
+          </Box>
+        </Box>
       </Box>
 
       <Box
@@ -100,7 +201,7 @@ export default function CmBox2() {
           width: {
             xs: "100%",
             md: "30%",
-            height: "500px",
+            height: "680px",
             backgroundColor: "green",
             borderRadius: "10px",
             backgroundColor: dark ? "#1e2126" : "white",
