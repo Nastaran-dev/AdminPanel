@@ -8,7 +8,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import InputBase from "@mui/material/InputBase";
-export default function GroupAvatars() {
+export default function CmBox1() {
   const { dark } = useContext(myTheme);
   const [age, setAge] = useState("Monthly");
   const Style = {
@@ -30,6 +30,7 @@ export default function GroupAvatars() {
       backgroundRepeat: "no-repeat",
       height: "220px",
       borderRadius: "10px",
+      border:"1px solid #35383c",
       gap: "20px",
     },
     Style3: {
