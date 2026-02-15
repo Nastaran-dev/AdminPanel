@@ -248,7 +248,8 @@ export default function CustomizedList({ children }) {
       sx={{
         display: "flex",
         minHeight: "100vh",
-        backgroundColor: "black"
+        backgroundColor: "black",
+      
       }}
     >
       <Box
@@ -747,7 +748,7 @@ export default function CustomizedList({ children }) {
           </Box>
         </Box>
 
-        <Box sx={{ flexGrow: 1 , p:1}}>{children}</Box>
+        <Box sx={{ flexGrow: 1 , p:1 , overflowX:"hidden"}}>{children}</Box>
       </Box>
     </Box>
   );
