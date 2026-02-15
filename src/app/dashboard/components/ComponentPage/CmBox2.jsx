@@ -6,6 +6,9 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DownloadIcon from "@mui/icons-material/Download";
 import { BarChart } from "@mui/x-charts/BarChart";
+import Image from "next/image";
+
+
 
 const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
 const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
@@ -20,6 +23,7 @@ export default function CmBox2() {
         gap: "20px",
         flexDirection: { xs: "column", md: "row" },
         marginTop: "20px",
+       
       }}
     >
       <Box
@@ -27,11 +31,12 @@ export default function CmBox2() {
           width: {
             xs: "100%",
             md: "70%",
-            height: "675px",
+           height:{xs:"680px",sm:"800px",md:"680px"},
             backgroundColor: "red",
             borderRadius: "10px",
             backgroundColor: dark ? "#1e2126" : "white",
             border: "0.1px solid #35383c",
+           
           },
         }}
       >
@@ -118,7 +123,7 @@ export default function CmBox2() {
             ]}
           />
         </Box>
-        <Box sx={{ display: "flex", justifyContent:"space-evenly" , flexWrap:"wrap", m:1 }}>
+        <Box sx={{ display: "flex", justifyContent:"space-evenly" , flexWrap:"wrap",margin:"0 5px" }}>
           <Box
             sx={{
               width: { xs: "47%", md: "30%" },
@@ -174,7 +179,8 @@ export default function CmBox2() {
               border: "1px solid gray",
               marginTop:{xs:"10px",md:"0px"},
               borderRadius: "10px",
-              p: 1.5,
+              padding:"0 10px",
+              margin:"10px 5px"
             }}
           >
             <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -201,15 +207,30 @@ export default function CmBox2() {
           width: {
             xs: "100%",
             md: "30%",
-            height: "680px",
+            height:{xs:"680px",sm:"800px",md:"680px"},
             backgroundColor: "green",
             borderRadius: "10px",
             backgroundColor: dark ? "#1e2126" : "white",
             border: "0.1px solid #35383c",
-            boxShadow: "inset -17px 23px 65px 4px rgba(179,149,43,0.87)",
+            // boxShadow: "inset -17px 23px 65px 4px rgba(179,149,43,0.87)",
+            display:"flex",
+            flexDirection:"column",
+            gap:"10px",
+          
           },
         }}
-      ></Box>
+      >
+        <Typography sx={{color:dark?"white":"black",fontSize:"25px",margin:"10px auto",fontWeight:"bold"}}>Congratulation James</Typography>
+        <Box sx={{display:"flex" , justifyContent:"center"}}>
+         <Image src="/images/Nb.png" width={500} height={500}  alt="My"></Image>
+        </Box>
+        <Box sx={{display:"flex" , gap:"3px",flexDirection:"column"}}>
+          <Typography sx={{color:dark?"white":"black",fontWeight:"600",margin:"auto",fontSize:"50px"}}>$1200K</Typography>
+          <Typography sx={{color:dark?"white":"#858991",margin:"auto"}}>0.95% since last year</Typography>
+          <Typography sx={{color:dark?"white":"#7883a0",margin:"auto",textAlign:"center"}}>You have reached 99.9% of your sales target today.</Typography>
+        </Box>
+         <Typography sx={{color:"#292df0",margin:"auto",p:1,fontWeight:"700",cursor:"pointer"}}>Updated 20 minutes ago.</Typography>
+      </Box>
     </Box>
   );
 }
