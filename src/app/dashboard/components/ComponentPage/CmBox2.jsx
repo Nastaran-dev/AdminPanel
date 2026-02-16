@@ -219,7 +219,7 @@ export default function CmBox2() {
       >
         <Typography sx={{color:dark?"white":"black",fontSize:"25px",margin:"10px auto",fontWeight:"bold"}}>Congratulation James</Typography>
         <Box sx={{display:"flex" , justifyContent:"center"}}>
-         <Image src="/images/Nb.png" width={500} height={500}  alt="My"></Image>
+         <Image src="/images/best-removebg-preview.png" width={500} height={500}  alt="My"></Image>
         </Box>
         <Box sx={{display:"flex" , gap:"3px",flexDirection:"column"}}>
           <Typography sx={{color:dark?"white":"black",fontWeight:"600",margin:"auto",fontSize:"50px"}}>$1200K</Typography>

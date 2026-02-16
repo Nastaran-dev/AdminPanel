@@ -47,7 +47,7 @@ import DarkModeToggle from "../ToggleBtn/ToggleBtn";
 import Link from "next/link";
 import { myTheme } from "../store/Store";
 import { usePathname } from "next/navigation";
-
+import Popper from '@mui/material/Popper';
 const data = [
   { icon: <People />, label: "Dashboard", href: "/dashboard" },
   { icon: <DnsIcon />, label: "Employees", href: "/dashboard/Empliyees" },
@@ -82,25 +82,25 @@ const peopel = [
 const peopel2 = [
   {
     id: 1,
-    image: "/images/imgi_1_avatar1.webp",
+    image: "/images/img1.jpg",
     title: "David Nester Birthday",
     info: "Today",
   },
   {
     id: 2,
-    image: "/images/imgi_2_avatar2.webp",
+    image: "/images/img2.jpg",
     title: "Perfection Simplified",
     info: "jame smith commented..",
   },
   {
     id: 3,
-    image: "/images/imgi_3_avatar3.webp",
+    image: "/images/img3.jpg",
     title: "AharlieKane",
     info: "Sami is online",
   },
   {
     id: 4,
-    image: "/images/imgi_4_avatar4.webp",
+    image: "/images/img4.jpg",
     title: "Athan Jacoby",
     info: "Nargis left 30 mins ago",
   },
@@ -109,73 +109,73 @@ const peopel2 = [
 const peopel3 = [
   {
     id: 1,
-    image: "/images/imgi_5_avatar5.webp",
+    image: "/images/img5.jpg",
     title: "Archie Parker",
     info: "Kalid is online",
   },
   {
     id: 2,
-    image: "/images/imgi_6_avatar6.webp",
+    image: "/images/img6.jpg",
     title: "Alfie Mason",
     info: "Taherah left 7 mins ago",
   },
   {
     id: 3,
-    image: "/images/imgi_7_avatar7.webp",
+    image: "/images/img7.jpg",
     title: "AharlieKane",
     info: "Sami is online",
   },
   {
     id: 4,
-    image: "/images/imgi_8_avatar8.webp",
+    image: "/images/img8.jpg",
     title: "Athan Jacoby",
     info: "Nargis left 30 mins ago",
   },
   {
     id: 5,
-    image: "/images/imgi_9_avatar9.webp",
+    image: "/images/img9.jpg",
     title: "Athan Jacoby",
     info: "Nargis left 30 mins ago",
   },
   {
     id: 6,
-    image: "/images/imgi_10_avatar10.webp",
+    image: "/images/img10.jpg",
     title: "Bashid Samim",
     info: "Rashid left 50 mins ago",
   },
   {
     id: 7,
-    image: "/images/imgi_4_avatar4.webp",
+    image: "/images/img11.jpg",
     title: "AharlieKane",
     info: "Sami is online",
   },
   {
     id: 8,
-    image: "/images/imgi_1_avatar1.webp",
+    image: "/images/img2.jpg",
     title: "Athan Jacoby",
     info: "Nargis left 30 mins ago",
   },
   {
     id: 9,
-    image: "/images/imgi_2_avatar2.webp",
+    image: "/images/img3.jpg",
     title: "Breddie Ronan",
     info: "Kalid is online",
   },
   {
     id: 10,
-    image: "/images/imgi_3_avatar3.webp",
+    image: "/images/img4.jpg",
     title: "Ceorge Carson",
     info: "aherah left 7 mins ago",
   },
   {
     id: 11,
-    image: "/images/imgi_5_avatar5.webp",
+    image: "/images/img5.jpg",
     title: "Darry Parker",
     info: "Sami is online",
   },
   {
     id: 12,
-    image: "/images/imgi_7_avatar7.webp",
+    image: "/images/img7.jpg",
     title: "Denry Hunter",
     info: "Nargis left 30 mins ago",
   },
@@ -224,7 +224,7 @@ export default function CustomizedList({ children }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openn = Boolean(anchorEl);
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(anchorEl ? null : event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -345,6 +345,7 @@ export default function CustomizedList({ children }) {
           <ListItemButton component="a" href="#customized-list">
             <Box
               sx={{
+
                 display: "flex",
                 alignItems: "center",
                 gap: 1,
@@ -394,7 +395,7 @@ export default function CustomizedList({ children }) {
               <IconButton size="large">
                 <Settings sx={{ color: "white" }} />
                 <ArrowRight
-                  sx={{ position: "absolute", right: 4, opacity: 0 }}
+                  // sx={{ position: "absolute", right: 4, opacity: 0 }}
                 />
               </IconButton>
             </Tooltip>
@@ -586,6 +587,7 @@ export default function CustomizedList({ children }) {
                       right: 0,
                       zIndex: 999,
                       backgroundColor: dark ? "black" : "white",
+                      borderRadius:"25px"
                     }}
                   >
                     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -672,11 +674,11 @@ export default function CustomizedList({ children }) {
                         return (
                           <React.Fragment key={val.id}>
                             <Box sx={{ alignItems: "center" }}>
-                              <Box sx={{ display: "flex", gap: "5px", p: 1 }}>
+                              <Box sx={{ display: "flex", gap: "5px", p:1 }}>
                                 <Image
                                   src={val.image}
-                                  width={60}
-                                  height={60}
+                                  width={50}
+                                  height={50}
                                   alt="logo"
                                   style={{
                                     objectFit: "cover",
@@ -769,19 +771,15 @@ export default function CustomizedList({ children }) {
                   aria-expanded={openn ? "true" : undefined}
                   onClick={handleClick}
                 ></Avatar>
-                <Menu
-                  // id="basic-menu"
+                <Popper
+                 placement="bottom-start"
+                  disablePortal={false}
                   sx={{ p: 0 }}
                   anchorEl={anchorEl}
                   open={openn}
                   onClose={handleClose}
-                  slotProps={{
-                    paper: {
-                      sx: {
-                        backgroundColor: dark ? "black" : "white",
-                      },
-                    },
-                  }}
+                style={{ backgroundColor: dark ? "black" : "white",
+                        borderRadius:"20px",}}
                 >
                   <Box>
                     <ListItem alignItems="flex-start">
@@ -825,18 +823,13 @@ export default function CustomizedList({ children }) {
                         <Box sx={{ color: "red", scale: "0.8" }}>
                           <LogoutIcon />
                         </Box>
-                        <ListItemText
-                          primary="Logout"
-                          primaryTypographyProps={{
-                            color: dark ? "white" : "black",
-                            fontSize: 15,
-                          }}
-                          sx={{ padding: "0 5px" }}
-                        />
+                        <Link href="/"  style={{ color: dark ? "white" : "black",
+                            fontSize: 15,padding: "0 5px"}}>Logout</Link>
+                       
                       </ListItemButton>
                     </ListItem>
                   </Box>
-                </Menu>
+                </Popper>
               </Box>
             </Box>
           </Box>

@@ -91,55 +91,55 @@ const rows = [
   {
     id: 1,
     lastName: "James Carter",
-    firstName: "/images/imgi_9_avatar9.webp",
+    firstName: "/images/img5.jpg",
     age: "	24 May 2024",
   },
   {
     id: 2,
     lastName: "Michael Thompson",
-    firstName: "/images/imgi_1_avatar1.webp",
+    firstName: "/images/img4.jpg",
     age: "	23 May 2024",
   },
   {
     id: 3,
     lastName: "Daniel Rivera",
-    firstName: "/images/imgi_2_avatar2.webp",
+    firstName: "/images/img2.jpg",
     age: "	22 May 2024",
   },
   {
     id: 4,
     lastName: "Robert Bennett",
-    firstName: "/images/imgi_3_avatar3.webp",
+    firstName: "/images/img1.jpg",
     age: "	21 May 2024",
   },
   {
     id: 5,
     lastName: "Anthony Wallace",
-    firstName: "/images/imgi_4_avatar4.webp",
+    firstName: "/images/img6.jpg",
     age: "	20 May 2024",
   },
   {
     id: 6,
     lastName: "Noah Bennett",
-    firstName: "/images/imgi_5_avatar5.webp",
+    firstName: "/images/img7.jpg",
     age: "	19 May 2024",
   },
   {
     id: 7,
     lastName: "Ethan Carter",
-    firstName: "/images/imgi_6_avatar6.webp",
+    firstName: "/images/img8.jpg",
     age: "	18 May 2024",
   },
   {
     id: 8,
     lastName: "Frances",
-    firstName: "/images/imgi_7_avatar7.webp",
+    firstName: "/images/img9.jpg",
     age: "	17 May 2024",
   },
   {
     id: 9,
     lastName: "Roxie",
-    firstName: "/images/imgi_8_avatar8.webp",
+    firstName: "/images/img10.jpg",
     age: "	16 May 2024",
   },
 ];
@@ -341,7 +341,7 @@ export default function CmBox3() {
           <Box sx={{ display: "flex", gap: "10px" }}>
             {" "}
             <Image
-              src="/images/imgi_4_avatar4.webp"
+              src="/images/img3.jpg"
               width={50}
               height={30}
               alt="hi"
@@ -383,9 +383,9 @@ export default function CmBox3() {
             renderSurplus={(surplus) => <span>+{surplus.toString()[0]}k</span>}
             total={4251}
           >
-            <Avatar alt="Remy Sharp" src="/images/imgi_1_avatar1.webp" />
-            <Avatar alt="Travis Howard" src="/images/imgi_2_avatar2.webp" />
-            <Avatar alt="Agnes Walker" src="/images/imgi_3_avatar3.webp" />
+            <Avatar alt="Remy Sharp" src="/images/img2.jpg" />
+            <Avatar alt="Travis Howard" src="/images/img11.jpg" />
+            <Avatar alt="Agnes Walker" src="/images/img9.jpg" />
           </AvatarGroup>
           <Box>
             <Typography
