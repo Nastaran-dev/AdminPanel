@@ -27,7 +27,7 @@ export default function CmBox2() {
         sx={{
           width: {
             xs: "100%",
-            md: "70%",
+            lg: "70%",
            height:{xs:"680px",sm:"800px",md:"680px"},
             backgroundColor: "red",
             borderRadius: "10px",
@@ -203,7 +203,7 @@ export default function CmBox2() {
         sx={{
           width: {
             xs: "100%",
-            md: "30%",
+            lg: "30%",
             height:{xs:"680px",sm:"800px",md:"680px"},
             backgroundColor: "green",
             borderRadius: "10px",

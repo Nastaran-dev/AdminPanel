@@ -8,22 +8,24 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import InputBase from "@mui/material/InputBase";
+
 export default function CmBox1() {
   const { dark } = useContext(myTheme);
   const [age, setAge] = useState("Monthly");
   const Style = {
     Style1: {
       display: "flex",
-      flexDirection: { xs: "column", md: "row" },
+      flexDirection: { xs: "column", lg: "row" },
       justifyContent: "center",
       gap: "20px",
+      
       width: "100%",
     },
     Style2: {
       display: "flex",
       padding: 2,
       justifyContent: "space-between",
-      width: { xs: "100%", md: "50%" },
+      width: { xs: "100%", lg: "50%" },
       backgroundColor: "#633dfe",
       backgroundImage: 'url("/images/background.png")',
       backgroundSize: "400px",
@@ -49,13 +51,12 @@ export default function CmBox1() {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
+     
     },
     Style6: {
       backgroundColor: dark ? "#1e1e1e" : "#ffffff",
       borderRadius: "20px",
       overflow: "hidden",
-     
-
     },
     Style7: {
       width: { xs: "25px", md: "40px" },

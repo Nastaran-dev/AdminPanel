@@ -168,7 +168,7 @@ export default function CmBox3() {
         width: "100%",
         display: "flex",
         gap: "20px",
-        flexDirection: { xs: "column", md: "row" },
+        flexDirection: { xs: "column", lg: "row" },
         marginTop: "20px",
         overflowX: "hidden",
       }}
@@ -177,7 +177,7 @@ export default function CmBox3() {
         sx={{
           width: {
             xs: "100%",
-            md: "70%",
+            lg: "70%",
           },
           height: "400px",
           borderRadius: "10px",
@@ -191,6 +191,7 @@ export default function CmBox3() {
             width: "100%",
             height: "100%",
             overflow: "hidden",
+            backgroundColor: dark ? "#1e2126" : "white",
           }}
         >
           <DataGrid
@@ -201,18 +202,95 @@ export default function CmBox3() {
             checkboxSelection
             sx={{
               backgroundColor: dark ? "#1e2126" : "white",
-              color: dark ? "gray" : "black",
+              color: dark ? "#fff" : "#000",
               border: 0,
+              // Header styling
+              "& .MuiDataGrid-columnHeaders": {
+                backgroundColor: dark ? "#2a2d35" : "#f5f5f5",
+                color: dark ? "#b0b0b0" : "#000",
+                borderBottom: dark ? "1px solid #35383c" : "1px solid #e0e0e0",
+              },
+              "& .MuiDataGrid-columnHeaderTitle": {
+                color: dark ? "#b0b0b0" : "#000",
+                fontWeight: 600,
+              },
+              "& .MuiDataGrid-columnHeader": {
+                color: dark ? "#b0b0b0" : "#000",
+              },
+              // Cell styling
+              "& .MuiDataGrid-cell": {
+                color: dark ? "#b0b0b0" : "#000",
+                borderBottom: dark ? "1px solid #35383c" : "1px solid #e0e0e0",
+              },
+              // Row styling
+              "& .MuiDataGrid-row": {
+                "&:hover": {
+                  backgroundColor: dark ? "#2a2d35" : "#f5f5f5",
+                },
+                "&.Mui-selected": {
+                  backgroundColor: dark ? "rgba(35, 100, 196, 0.16)" : "rgba(25, 118, 210, 0.08)",
+                  "&:hover": {
+                    backgroundColor: dark ? "rgba(35, 100, 196, 0.24)" : "rgba(25, 118, 210, 0.12)",
+                  },
+                },
+              },
+              // Icons in cells
+              "& .MuiDataGrid-cell .MuiSvgIcon-root": {
+                color: dark ? "#b0b0b0" : "#666",
+              },
+              // Checkbox styling
+              "& .MuiCheckbox-root": {
+                color: dark ? "#b0b0b0" : "#666",
+                "&.Mui-checked": {
+                  color: dark ? "#2364c4" : "#1976d2",
+                },
+              },
+              // Footer styling
+              "& .MuiDataGrid-footerContainer": {
+                backgroundColor: dark ? "#2a2d35" : "#f5f5f5",
+                borderTop: dark ? "1px solid #35383c" : "1px solid #e0e0e0",
+                color: dark ? "#fff" : "#000",
+              },
+              "& .MuiTablePagination-root": {
+                color: dark ? "#fff" : "#000",
+              },
+              "& .MuiTablePagination-selectIcon": {
+                color: dark ? "#fff" : "#000",
+              },
+              "& .MuiTablePagination-actions .MuiIconButton-root": {
+                color: dark ? "#fff" : "#000",
+              },
+              // Scrollbar styling
               "& .MuiDataGrid-virtualScroller": {
                 overflowX: "auto",
+                "&::-webkit-scrollbar": {
+                  width: "8px",
+                  height: "8px",
+                },
+                "&::-webkit-scrollbar-track": {
+                  backgroundColor: dark ? "#1e2126" : "#f1f1f1",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  backgroundColor: dark ? "#35383c" : "#888",
+                  borderRadius: "4px",
+                  "&:hover": {
+                    backgroundColor: dark ? "#4a4d55" : "#555",
+                  },
+                },
               },
               "& .MuiDataGrid-main": {
                 overflow: "hidden",
               },
-
-              "&:hover": {
-                color: "#2364c4",
-                fontWeight: "600",
+              // Column separator
+              "& .MuiDataGrid-columnSeparator": {
+                color: dark ? "#35383c" : "#e0e0e0",
+              },
+              // Menu
+              "& .MuiDataGrid-menuIcon": {
+                color: dark ? "#fff" : "#000",
+              },
+              "& .MuiDataGrid-sortIcon": {
+                color: dark ? "#fff" : "#000",
               },
             }}
           />
@@ -223,7 +301,7 @@ export default function CmBox3() {
         sx={{
           width: {
             xs: "100%",
-            md: "30%",
+            lg: "30%",
           },
           height: "400px",
           borderRadius: "10px",
