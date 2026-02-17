@@ -7,7 +7,6 @@ import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { myTheme } from "@/app/store/Store";
-import Divider from '@mui/material/Divider';
 export default function Buttons() {
     const{dark}=useContext(myTheme)
   return (
