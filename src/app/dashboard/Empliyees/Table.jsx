@@ -360,7 +360,7 @@ const filtered = employees.filter((val) => {
         >
           <Table sx={{ minWidth: isSm ? 500 : isMd ? 700 : 900 }}>
 
-            {/* Head */}
+            
             <TableHead>
               <TableRow sx={{ bgcolor: c.headBg }}>
                 {visibleColumns.map((col) => (
@@ -588,7 +588,6 @@ export default function EmployeeTable({search , status , gender, location , depa
   const { dark } = useContext(myTheme);
 
   const muiTheme = createTheme({
-    typography: { fontFamily: "'Nunito', 'Segoe UI', sans-serif" },
     palette:    { mode: dark ? "dark" : "light" },
     breakpoints: {
       values: { xs: 0, sm: 600, md: 900, lg: 1200, xl: 1536 },

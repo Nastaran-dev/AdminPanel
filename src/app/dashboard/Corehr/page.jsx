@@ -1,9 +1,12 @@
 import React from 'react'
-
+import Box from '@mui/material/Box';
+import Tablesmall from './TableSmall';
+import AttendanceTable from './AttendanceTable';
 export default function Corehr() {
   return (
-    <div>
-      <h1>this is core hr</h1>
-    </div>
+    <Box>
+      <Tablesmall/>
+      <AttendanceTable/>
+    </Box>
   )
 }
