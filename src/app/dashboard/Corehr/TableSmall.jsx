@@ -283,8 +283,8 @@ function ProjectSidebar({ dark, c }) {
         </DemoContainer>
       </LocalizationProvider>
 
-      {/* Schedule list */}
-      <Box sx={{ display: "flex", flexDirection: "column", height: "130px", overflowY: "auto", backgroundColor: "white", p: 1 }}>
+     
+      <Box sx={{ display: "flex", flexDirection: "column", height: "130px", overflowY: "auto", backgroundColor: "white", p: 1 ,borderRadius:"15px"}}>
         {SCHEDULE_ITEMS.map((item, i) => (
           <Box
             key={i}
