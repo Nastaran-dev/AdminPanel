@@ -25,19 +25,19 @@ import AddIcon from "@mui/icons-material/Add";
 import PersonIcon from "@mui/icons-material/Person";
 import { myTheme } from "@/app/store/Store";
 
-// ===== داده‌های کارمندان =====
+
 const employees = [
-  { id: 1, name: "Lucas Bennett",   role: "Web Designer",   avatar: "https://i.pravatar.cc/40?img=11", color: "#f59e0b" },
-  { id: 2, name: "Evelyn Hope",     role: "Web Designer",   avatar: "https://i.pravatar.cc/40?img=5",  color: "#8b5cf6" },
-  { id: 3, name: "Henry Mason",     role: "Web Designer",   avatar: "https://i.pravatar.cc/40?img=15", color: "#ec4899" },
-  { id: 4, name: "Sophia Jane",     role: "Web Designer",   avatar: "https://i.pravatar.cc/40?img=16", color: "#f59e0b" },
-  { id: 5, name: "Ethan Cole",      role: "Web Designer",   avatar: "https://i.pravatar.cc/40?img=12", color: "#f59e0b" },
-  { id: 6, name: "Isabella Claire", role: "Web Designer",   avatar: "https://i.pravatar.cc/40?img=9",  color: "#ec4899" },
-  { id: 7, name: "Liam Risher",     role: "Web Designer",   avatar: "https://i.pravatar.cc/40?img=13", color: "#ec4899" },
-  { id: 8, name: "Mia Torres",      role: "UI/UX Designer", avatar: "https://i.pravatar.cc/40?img=20", color: "#6c63ff" },
+  { id: 1, name: "Lucas Bennett",   role: "Web Designer",   avatar: "/images/img1.jpg", color: "#f59e0b" },
+  { id: 2, name: "Evelyn Hope",     role: "Web Designer",   avatar: "/images/img2.jpg",  color: "#8b5cf6" },
+  { id: 3, name: "Henry Mason",     role: "Web Designer",   avatar: "/images/img3.jpg", color: "#ec4899" },
+  { id: 4, name: "Sophia Jane",     role: "Web Designer",   avatar: "/images/img4.jpg", color: "#f59e0b" },
+  { id: 5, name: "Ethan Cole",      role: "Web Designer",   avatar: "/images/img5.jpg", color: "#f59e0b" },
+  { id: 6, name: "Isabella Claire", role: "Web Designer",   avatar: "/images/img6.jpg",  color: "#ec4899" },
+  { id: 7, name: "Liam Risher",     role: "Web Designer",   avatar: "/images/img7.jpg", color: "#ec4899" },
+  { id: 8, name: "Mia Torres",      role: "UI/UX Designer", avatar: "/images/img8.jpg", color: "#6c63ff" },
 ];
 
-// ===== روزهای ماه =====
+
 const days = [
   { day: 1,  weekday: "MO" }, { day: 2,  weekday: "Tu" }, { day: 3,  weekday: "We" },
   { day: 4,  weekday: "Th" }, { day: 5,  weekday: "Fr" }, { day: 6,  weekday: "Sa" },
@@ -52,7 +52,6 @@ const days = [
   { day: 31, weekday: "MO" },
 ];
 
-// ===== داده‌های حضور و غیاب =====
 const attendanceData = {
   1: [true,true,true,true,true,false,true,true,true,true,false,true,true,true,false,true,true,true,true,true,true,true,false,true,false,true,true,true,true,true,true],
   2: [true,true,true,true,true,false,true,true,false,true,false,true,true,true,false,false,true,true,true,true,true,true,false,true,false,true,false,true,true,true,true],
@@ -66,7 +65,6 @@ const attendanceData = {
 
 const getPresent = (empId) => (attendanceData[empId] || []).filter(Boolean).length;
 
-// ===== پالت رنگ برای لایت و دارک =====
 const palette = {
   light: {
     pageBg:      "#f8f9fb",
@@ -102,7 +100,7 @@ const palette = {
   },
 };
 
-// ===== آیکن حضور =====
+
 const AttendanceIcon = ({ present }) =>
   present ? (
     <CheckIcon sx={{ color: "#22c55e", fontSize: 16, filter: "drop-shadow(0 0 2px #bbf7d0)" }} />
@@ -110,7 +108,7 @@ const AttendanceIcon = ({ present }) =>
     <CloseIcon sx={{ color: "#ef4444", fontSize: 16, filter: "drop-shadow(0 0 2px #fecaca)" }} />
   );
 
-// ===== کارت موبایل =====
+
 const MobileCard = ({ employee, c }) => {
   const data = attendanceData[employee.id] || [];
   const present = getPresent(employee.id);
@@ -197,21 +195,16 @@ const MobileCard = ({ employee, c }) => {
     </Card>
   );
 };
-
-// ===== کامپوننت اصلی =====
 export default function AttendanceTable() {
   const muiTheme = useTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(muiTheme.breakpoints.between("sm", "md"));
   const [hoveredRow, setHoveredRow] = useState(null);
-
-  // ===== دریافت وضعیت dark از Context =====
   const { dark } = useContext(myTheme);
 
-  // ===== انتخاب رنگ‌ها بر اساس dark =====
   const c = dark ? palette.dark : palette.light;
 
-  // ===== ساخت MUI theme داینامیک =====
+ 
   const dynamicTheme = createTheme({
     palette: {
       mode: dark ? "dark" : "light",
@@ -270,7 +263,7 @@ export default function AttendanceTable() {
           }}
         >
 
-          {/* ===== هدر ===== */}
+        
           <Box
             sx={{
               display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -301,7 +294,6 @@ export default function AttendanceTable() {
             </Button>
           </Box>
 
-          {/* ===== موبایل: کارت ===== */}
           {isMobile ? (
             <Box p={2}>
               <Box
@@ -321,7 +313,6 @@ export default function AttendanceTable() {
             </Box>
 
           ) : (
-            /* ===== دسکتاپ/تبلت: جدول ===== */
             <TableContainer
               sx={{
                 overflowX: "auto",
@@ -332,7 +323,6 @@ export default function AttendanceTable() {
             >
               <Table size="small" sx={{ minWidth: isTablet ? 700 : 900 }}>
 
-                {/* هدر جدول */}
                 <TableHead>
                   <TableRow>
                     <TableCell
@@ -381,7 +371,6 @@ export default function AttendanceTable() {
                   </TableRow>
                 </TableHead>
 
-                {/* بدنه جدول */}
                 <TableBody>
                   {employees.map((emp) => {
                     const data = attendanceData[emp.id] || [];
@@ -399,7 +388,6 @@ export default function AttendanceTable() {
                           "&:last-child td": { border: 0 },
                         }}
                       >
-                        {/* نام کارمند */}
                         <TableCell
                           sx={{
                             position: "sticky", left: 0, zIndex: 1,
@@ -434,7 +422,6 @@ export default function AttendanceTable() {
                           </Stack>
                         </TableCell>
 
-                        {/* سلول‌های روز */}
                         {visibleDays.map((d, idx) => (
                           <TableCell key={d.day} align="center" sx={{ px: 0.5, py: 1 }}>
                             <Tooltip
@@ -461,7 +448,6 @@ export default function AttendanceTable() {
                           </TableCell>
                         ))}
 
-                        {/* مجموع */}
                         <TableCell
                           align="center"
                           sx={{
@@ -494,8 +480,6 @@ export default function AttendanceTable() {
               </Table>
             </TableContainer>
           )}
-
-          {/* ===== فوتر ===== */}
           <Box
             sx={{
               px: { xs: 2, sm: 3 }, py: 1.5,
