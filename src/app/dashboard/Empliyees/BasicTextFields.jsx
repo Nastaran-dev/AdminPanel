@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useContext } from "react";
 import { myTheme } from "@/app/store/Store";
-
+import EmployeeTable from "./Table"
 const currencies1 = [
   { value: "EUR", label: "All" },
   { value: "USD", label: "Active" },
@@ -286,6 +286,7 @@ export default function BasicTextFields() {
           </Button>
         </Stack>
       </Box>
+      <EmployeeTable/>
     </Box>
   );
 }
