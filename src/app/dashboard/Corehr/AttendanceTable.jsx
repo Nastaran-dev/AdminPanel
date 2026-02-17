@@ -120,7 +120,7 @@ const MobileCard = ({ employee, c }) => {
       sx={{
         mb: 2,
         border: `1px solid ${c.borderLight}`,
-        borderRadius: 3,
+        borderRadius: 2,
         bgcolor: c.paperBg,
         overflow: "hidden",
         transition: "box-shadow 0.2s, background-color 0.3s",
@@ -215,7 +215,7 @@ export default function AttendanceTable() {
       background: { default: c.pageBg, paper: c.paperBg },
     },
     typography: { fontFamily: "'Plus Jakarta Sans', 'Segoe UI', sans-serif" },
-    shape: { borderRadius: 12 },
+    shape: { borderRadius: 8 },
     components: {
       MuiTableCell: {
         styleOverrides: {
