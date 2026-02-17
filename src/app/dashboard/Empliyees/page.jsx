@@ -1,9 +1,10 @@
 import React from 'react'
-
+import Box from '@mui/material/Box';
+import Buttons from './Buttons';
 export default function page() {
   return (
-    <div >
-      <h1>This is employees</h1>
-    </div>
+    <Box sx={{border:"1px solid gray",borderRadius:"10px"}}>
+      <Buttons/>
+    </Box>
   )
 }
