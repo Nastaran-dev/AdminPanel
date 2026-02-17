@@ -48,7 +48,7 @@ const employees = [
     id: 1006,
     name: "Sophia Jane",
     role: "Web Designer",
-    department: "Computer Science",
+    department: "Web Designer",
     email: "abc@gmail.com",
     contact: "+91 123 456 7890",
     gender: "Male",
@@ -61,7 +61,7 @@ const employees = [
     id: 1010,
     name: "Scarlett Elise",
     role: "Web Designer",
-    department: "Computer Science",
+    department: "Web Designer",
     email: "abc@gmail.com",
     contact: "+91 123 456 7890",
     gender: "Female",
@@ -126,7 +126,7 @@ const employees = [
     id: 1015,
     name: "Lucas Bennett",
     role: "Web Designer",
-    department: "Computer Science",
+    department: "Web Designer",
     email: "cbc@gmail.com",
     contact: "+91 123 456 7890",
     gender: "Male",
@@ -139,7 +139,7 @@ const employees = [
     id: 1016,
     name: "Lucas Bennett",
     role: "Web Designer",
-    department: "Computer Science",
+    department: "Web Designer",
     email: "cbc@gmail.com",
     contact: "+91 123 456 7890",
     gender: "Male",
@@ -272,8 +272,7 @@ function MobileCard({ emp, c }) {
 }
 
 
-function InnerTable({ dark }) {
-  const[search , setSearch]=useState("")  
+function InnerTable({ dark ,search,status,department,gender,location}) {  
   const muiTheme = useTheme();
   const isXs = useMediaQuery(muiTheme.breakpoints.down("sm"));   
   const isSm = useMediaQuery(muiTheme.breakpoints.down("md"));   
@@ -286,8 +285,18 @@ function InnerTable({ dark }) {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(columnId);
   };
+//   /////////////////ارایه رو فیلتر می کنیم
+const filtered = employees.filter((val) => {
+  const matchsearch     = val.name.toLowerCase().includes(search.toLowerCase())
+  const matchstatus     = !status     || val.status     === status
+  const matchlocation   = !location   || val.location   === location
+  const matchdepartment = !department || val.department === department
+  const matchgender     = !gender     || val.gender     === gender
 
-  const sortedEmployees = [...employees].sort(getComparator(order, orderBy));
+  return matchsearch && matchstatus && matchlocation && matchdepartment && matchgender
+})
+
+  const sortedEmployees = [...filtered].sort(getComparator(order, orderBy));
 
  
   const c = {
@@ -575,7 +584,7 @@ function InnerTable({ dark }) {
   );
 }
 
-export default function EmployeeTable() {
+export default function EmployeeTable({search , status , gender, location , department}) {
   const { dark } = useContext(myTheme);
 
   const muiTheme = createTheme({
@@ -588,7 +597,7 @@ export default function EmployeeTable() {
 
   return (
     <ThemeProvider theme={muiTheme}>
-      <InnerTable dark={dark} />
+      <InnerTable dark={dark} search={search} status={status} gender={gender} location={location} department={department} />
     </ThemeProvider>
   );
 }

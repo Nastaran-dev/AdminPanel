@@ -1,37 +1,37 @@
-"use client"
+"use client";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { myTheme } from "@/app/store/Store";
-import EmployeeTable from "./Table"
+import EmployeeTable from "./Table";
 const currencies1 = [
-  { value: "EUR", label: "All" },
-  { value: "USD", label: "Active" },
-  { value: "BTC", label: "InActive" },
-  { value: "JPY", label: "Pending" },
+  { value: "", label: "All" },
+  { value: "Active", label: "Active" },
+  { value: "Inactive", label: "InActive" },
+  { value: "pending", label: "Pending" },
 ];
 const currencies2 = [
-  { value: "EUR", label: "All" },
-  { value: "USD", label: "computer Science" },
-  { value: "BTC", label: "Web Designer" },
+  { value: "", label: "All" },
+  { value: "Computer Science", label: "Computer Science" },
+  { value: "Web Designer", label: "Web Designer" },
 ];
 const currencies3 = [
-  { value: "EUR", label: "All" },
-  { value: "USD", label: "Male" },
-  { value: "BTC", label: "Female" },
+  { value: "", label: "All" },
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" },
 ];
 const currencies4 = [
-  { value: "EUR", label: "All" },
-  { value: "USD", label: "Delhi" },
-  { value: "BTC1", label: "Bengaluru" },
-  { value: "BTC2", label: "Hyderabad" },
-  { value: "BTC3", label: "Mumbai" },
-  { value: "BTC4", label: "Ahmedabad" },
-  { value: "BTC5", label: "Kolkata" },
-  { value: "BTC6", label: "Chennai" },
+  { value: "", label: "All" },
+  { value: "Delhi", label: "Delhi" },
+  { value: "Bengaluru", label: "Bengaluru" },
+  { value: "Hyderabad", label: "Hyderabad" },
+  { value: "Mumbai", label: "Mumbai" },
+  { value: "Ahmedabad", label: "Ahmedabad" },
+  { value: "Kolkata", label: "Kolkata" },
+  { value: "Chennai", label: "Chennai" },
 ];
 
 const fieldSx = (dark) => ({
@@ -87,17 +87,23 @@ const menuProps = (dark) => ({
         my: "2px",
         transition: "all 0.15s",
         "&:hover": {
-          backgroundColor: dark ? "rgba(99,61,254,0.16)" : "rgba(99,61,254,0.07)",
+          backgroundColor: dark
+            ? "rgba(99,61,254,0.16)"
+            : "rgba(99,61,254,0.07)",
           color: dark ? "#b8a9ff" : "#633dfe",
           paddingLeft: "18px",
         },
         "&.Mui-selected": {
-          backgroundColor: dark ? "rgba(99,61,254,0.25)" : "rgba(99,61,254,0.12)",
+          backgroundColor: dark
+            ? "rgba(99,61,254,0.25)"
+            : "rgba(99,61,254,0.12)",
           color: dark ? "#c4b5ff" : "#633dfe",
           fontWeight: 700,
         },
         "&.Mui-selected:hover": {
-          backgroundColor: dark ? "rgba(99,61,254,0.32)" : "rgba(99,61,254,0.18)",
+          backgroundColor: dark
+            ? "rgba(99,61,254,0.32)"
+            : "rgba(99,61,254,0.18)",
         },
       },
     },
@@ -106,11 +112,23 @@ const menuProps = (dark) => ({
 
 export default function BasicTextFields() {
   const { dark } = useContext(myTheme);
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState("");
+  const [department, setDepartment] = useState("");
+  const [gender, setGender] = useState("");
+  const [location, setlocation] = useState("");
 
+  const[apply , setApply]=useState(
+    {search:"",
+      status:"",
+      gender:"",
+      department:"",
+      location:""
+    })
   return (
     <Box
       sx={{
-        marginTop:"20px",
+        marginTop: "20px",
         backgroundColor: dark ? "#0c0c1d" : "#ffffff",
         borderRadius: "22px",
         border: dark ? "1px solid #633dfe2a" : "1px solid #ebebf5",
@@ -121,7 +139,6 @@ export default function BasicTextFields() {
         transition: "background 0.35s, box-shadow 0.35s",
       }}
     >
-     
       <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2.5 }}>
         <Box
           sx={{
@@ -145,7 +162,6 @@ export default function BasicTextFields() {
         </Box>
       </Box>
 
-     
       <Box
         component="form"
         sx={{
@@ -158,20 +174,22 @@ export default function BasicTextFields() {
         noValidate
         autoComplete="off"
       >
-        
         <TextField
           label="Search"
           variant="outlined"
+          value={search}
           size="small"
+          onChange={(e)=>setSearch(e.target.value)}
           sx={fieldSx(dark)}
         />
 
-        
         <TextField
           select
           label="Status"
           defaultValue="EUR"
           size="small"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
           sx={fieldSx(dark)}
           SelectProps={{ MenuProps: menuProps(dark) }}
         >
@@ -182,12 +200,13 @@ export default function BasicTextFields() {
           ))}
         </TextField>
 
-     
         <TextField
           select
           label="Department"
           defaultValue="EUR"
           size="small"
+          value={department}
+          onChange={(e) => setDepartment(e.target.value)}
           sx={fieldSx(dark)}
           SelectProps={{ MenuProps: menuProps(dark) }}
         >
@@ -198,12 +217,13 @@ export default function BasicTextFields() {
           ))}
         </TextField>
 
-      
         <TextField
           select
           label="Gender"
           defaultValue="EUR"
           size="small"
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
           sx={fieldSx(dark)}
           SelectProps={{ MenuProps: menuProps(dark) }}
         >
@@ -214,12 +234,13 @@ export default function BasicTextFields() {
           ))}
         </TextField>
 
-      
         <TextField
           select
           label="Location"
           defaultValue="EUR"
           size="small"
+          value={location}
+          onChange={(e) => setlocation(e.target.value)}
           sx={fieldSx(dark)}
           SelectProps={{ MenuProps: menuProps(dark) }}
         >
@@ -230,9 +251,7 @@ export default function BasicTextFields() {
           ))}
         </TextField>
 
-       
         <Stack direction="row" spacing={1.5}>
-          
           <Button
             variant="outlined"
             sx={{
@@ -246,17 +265,28 @@ export default function BasicTextFields() {
               textTransform: "none",
               transition: "all 0.25s ease",
               "&:hover": {
-                backgroundColor: dark ? "rgba(99,61,254,0.10)" : "rgba(99,61,254,0.06)",
+                backgroundColor: dark
+                  ? "rgba(99,61,254,0.10)"
+                  : "rgba(99,61,254,0.06)",
                 borderColor: "#633dfe",
                 color: dark ? "#c4b5ff" : "#633dfe",
-                boxShadow: dark ? "0 0 14px rgba(99,61,254,0.28)" : "0 2px 10px rgba(99,61,254,0.18)",
+                boxShadow: dark
+                  ? "0 0 14px rgba(99,61,254,0.28)"
+                  : "0 2px 10px rgba(99,61,254,0.18)",
               },
             }}
+         onClick={() => {
+  setSearch("")
+  setStatus("")
+  setDepartment("")
+  setGender("")
+  setlocation("")
+  setApply({ search: "", status: "", department: "", gender: "", location: "" })
+}}
           >
             Reset
           </Button>
 
-       
           <Button
             variant="contained"
             sx={{
@@ -281,12 +311,13 @@ export default function BasicTextFields() {
                 boxShadow: "0 2px 10px rgba(99,61,254,0.35)",
               },
             }}
+            onClick={()=>{setApply({search , status , gender , department , location})}}
           >
             Apply
           </Button>
         </Stack>
       </Box>
-      <EmployeeTable/>
+      <EmployeeTable search={apply.search} status={apply.status} department={apply.department} gender={apply.gender} location={apply.location} />
     </Box>
   );
 }
