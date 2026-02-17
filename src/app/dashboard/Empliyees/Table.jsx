@@ -273,6 +273,7 @@ function MobileCard({ emp, c }) {
 
 
 function InnerTable({ dark }) {
+  const[search , setSearch]=useState("")  
   const muiTheme = useTheme();
   const isXs = useMediaQuery(muiTheme.breakpoints.down("sm"));   
   const isSm = useMediaQuery(muiTheme.breakpoints.down("md"));   
