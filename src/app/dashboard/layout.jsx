@@ -49,19 +49,19 @@ import { myTheme } from "../store/Store";
 import { usePathname } from "next/navigation";
 import Popper from '@mui/material/Popper';
 const data = [
-  { icon: <People />, label: "Dashboard", href: "/dashboard" },
-  { icon: <DnsIcon />, label: "Employees", href: "/dashboard/Empliyees" },
-  { icon: <PermMedia />, label: "Core Hr", href: "/dashboard/Corehr" },
-  { icon: <Public />, label: "Finance", href: "/dashboard/Finance" },
-  { icon: <AutoStoriesIcon />, label: "Task", href: "/dashboard/Task" },
-  { icon: <AvTimerIcon />, label: "Performance", href: "/" },
-  { icon: <PermMedia />, label: "Projects", href: "/" },
-  { icon: <BarChartIcon />, label: "Reports", href: "/" },
-  { icon: <BlurOnIcon />, label: "Manage Clients", href: "/" },
-  { icon: <Brightness5Icon />, label: "Blog", href: "/" },
-  { icon: <BusAlertIcon />, label: "Apps", href: "/" },
-  { icon: <CachedIcon />, label: "Profile", href: "/" },
-  { icon: <CameraFrontIcon />, label: "Account", href: "/" },
+  {id:1, icon: <People />, label: "Dashboard", href: "/dashboard" },
+  {id:2, icon: <DnsIcon />, label: "Employees", href: "/dashboard/Empliyees" },
+  {id:3, icon: <PermMedia />, label: "Core Hr", href: "/dashboard/Corehr" },
+  {id:4, icon: <Public />, label: "Projects", href: "/dashboard/Projects" },
+  {id:5, icon: <AutoStoriesIcon />, label: "Task", href: "/dashboard/Task" },
+  {id:6, icon: <AvTimerIcon />, label: "Performance", href: "/" },
+  {id:7, icon: <PermMedia />, label: "Projects", href: "/" },
+  {id:8, icon: <BarChartIcon />, label: "Reports", href: "/" },
+  {id:9, icon: <BlurOnIcon />, label: "Manage Clients", href: "/" },
+  {id:10, icon: <Brightness5Icon />, label: "Blog", href: "/" },
+  {id:11, icon: <BusAlertIcon />, label: "Apps", href: "/" },
+  {id:12, icon: <CachedIcon />, label: "Profile", href: "/" },
+  {id:13, icon: <CameraFrontIcon />, label: "Account", href: "/" },
 ];
 
 const data2 = [
@@ -214,7 +214,7 @@ export default function CustomizedList({ children }) {
   const { dark } = React.useContext(myTheme);
   const theme = useTheme();
   const Islaptop = useMediaQuery(theme.breakpoints.up("md"), { noSsr: true });
-  const [showIcon, setShowicon] = useState(true); // حالت پیش‌فرض باز
+  const [showIcon, setShowicon] = useState(true); 
 
   const [open, setOpen] = React.useState(true);
   useEffect(() => {
@@ -260,7 +260,6 @@ export default function CustomizedList({ children }) {
         padding: "10px 10px",
       }}
     >
-      {/* دکمه باز کردن سایدبار */}
       {!showIcon && (
         <Box
           sx={{
@@ -294,7 +293,6 @@ export default function CustomizedList({ children }) {
         </Box>
       )}
 
-      {/* Sidebar */}
       {showIcon && (
         <Paper
           elevation={0}
@@ -427,7 +425,7 @@ export default function CustomizedList({ children }) {
             {open &&
               data.map((item) => (
                 <ListItemButton
-                  key={item.label}
+                  key={item.id}
                   component={Link}
                   href={item.href}
                   style={getLinkStyle(item.href)}
