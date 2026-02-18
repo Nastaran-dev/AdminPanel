@@ -58,7 +58,6 @@ function SelectActionCard() {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
         backgroundColor: dark ? '#0f0f1a' : '#f5f5f5',
         p: 4,
         transition: 'background-color 0.4s ease',
