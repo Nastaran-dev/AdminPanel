@@ -48,6 +48,9 @@ import Link from "next/link";
 import { myTheme } from "../store/Store";
 import { usePathname } from "next/navigation";
 import Popper from '@mui/material/Popper';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
 const data = [
   {id:1, icon: <People />, label: "Dashboard", href: "/dashboard" },
   {id:2, icon: <DnsIcon />, label: "Employees", href: "/dashboard/Empliyees" },
@@ -65,11 +68,9 @@ const data = [
 ];
 
 const data2 = [
-  { icon: <People />, label: "Profile" },
-  { icon: <DnsIcon />, label: "My project" },
-  { icon: <People />, label: "Message" },
-  { icon: <DnsIcon />, label: "Notification" },
-  { icon: <People />, label: "settting" },
+  { icon: <InstagramIcon />, label: "Instagram" , href:"https://instagram.com/nastaran__dev" },
+  { icon: <LinkedInIcon />, label: "LinkedIn" , href:"https://www.linkedin.com/authwall?trk=bf&trkInfo=AQEunP6aOCxcgQAAAZx0b7mIvYAbzn5-rKzYq5v5NMPG3tyq4yBmhNB06VAnJzEk4pa46988UemKRId9x8mPX5Ah2LTVFNWewA6FDwkD_Lr8MimPmS3z2TD9wexWpvlFrUyQ220=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fnastaran-mohammadi-1515a8382%3Futm_source%3Dshare%26utm_campaign%3Dshare_via%26utm_content%3Dprofile%26utm_medium%3Dandroid_app" },
+  { icon: <GitHubIcon />, label: "Github", href:"https://github.com/nastaran-dev" },
 ];
 
 const peopel = [
@@ -791,7 +792,7 @@ export default function CustomizedList({ children }) {
                         }}
                         secondary={
                           <span style={{ color: dark ? "white" : "black" }}>
-                            {"Web Designer"}
+                            {"Front-End Developer"}
                           </span>
                         }
                       />
@@ -803,14 +804,7 @@ export default function CustomizedList({ children }) {
                             <Box sx={{ color: "#593ae0", scale: "0.8" }}>
                               {val.icon}
                             </Box>
-                            <ListItemText
-                              primary={val.label}
-                              primaryTypographyProps={{
-                                color: dark ? "white" : "black",
-                                fontSize: 15,
-                              }}
-                              sx={{ padding: "0 5px" }}
-                            />
+                            <Link href={val.href} style={{color: dark ? "white" : "black",fontSize: 15,padding: "0 5px" }}>{val.label}</Link>
                           </ListItemButton>
                         </ListItem>
                       );
