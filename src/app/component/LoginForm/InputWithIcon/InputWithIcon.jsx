@@ -304,12 +304,12 @@ export default function LoginForm() {
                   "& .MuiAlert-icon": { color: "#f87171" },
                 }}
               >
-                نام کاربری یا رمز عبور اشتباه است. دوباره تلاش کنید.
+              The username or password is incorrect. Please try again.
               </Alert>
             )}
 
             <Tooltip
-              title="کلیک کنید تا فرم به‌صورت خودکار پر شود"
+            title="Click to auto-fill with default credentials"
               placement="top"
             >
               <Box
@@ -357,7 +357,7 @@ export default function LoginForm() {
                     flexShrink: 0,
                   }}
                 >
-                  پیش‌فرض
+                  Default 
                 </Typography>
 
                 <Box sx={{ display: "flex", gap: 1, flex: 1 }}>
@@ -395,7 +395,7 @@ export default function LoginForm() {
                     transition: "color 0.3s",
                   }}
                 >
-                  {filled ? "✓ پر شد" : "کلیک کن"}
+                  {filled ? "✓Filled " : "Click here"}
                 </Typography>
               </Box>
             </Tooltip>

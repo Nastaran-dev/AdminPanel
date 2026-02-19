@@ -32,7 +32,7 @@ export default function CmBox1() {
       backgroundRepeat: "no-repeat",
       height: "220px",
       borderRadius: "10px",
-      border:"1px solid #35383c",
+      border:"1px solid #bebdbd",
       gap: "20px",
     },
     Style3: {

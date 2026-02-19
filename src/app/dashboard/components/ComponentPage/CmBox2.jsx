@@ -32,7 +32,7 @@ export default function CmBox2() {
             backgroundColor: "red",
             borderRadius: "10px",
             backgroundColor: dark ? "#1e2126" : "white",
-            border: "0.1px solid #35383c",
+            border: "0.1px solid #bebdbd",
            
           },
         }}
@@ -124,7 +124,7 @@ export default function CmBox2() {
           <Box
             sx={{
               width: { xs: "47%", md: "30%" },
-              border: "1px solid gray",
+              border: "1px solid #bebdbd",
               borderRadius: "10px",
               
               p: 1.5,
@@ -149,7 +149,7 @@ export default function CmBox2() {
           <Box
             sx={{
               width: { xs: "47%", md: "30%" },
-              border: "1px solid gray",
+              border: "1px solid #bebdbd",
               borderRadius: "10px",
               p: 1.5,
             }}
@@ -173,7 +173,7 @@ export default function CmBox2() {
           <Box
             sx={{
               width: { xs: "100%", md: "30%" },
-              border: "1px solid gray",
+              border: "1px solid #bebdbd",
               marginTop:{xs:"10px",md:"0px"},
               borderRadius: "10px",
               padding:"0 10px",
@@ -208,7 +208,7 @@ export default function CmBox2() {
             backgroundColor: "green",
             borderRadius: "10px",
             backgroundColor: dark ? "#1e2126" : "white",
-            border: "0.1px solid #35383c",
+            border: "0.1px solid #bebdbd",
             // boxShadow: "inset -17px 23px 65px 4px rgba(179,149,43,0.87)",
             display:"flex",
             flexDirection:"column",

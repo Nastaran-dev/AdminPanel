@@ -56,7 +56,7 @@ const data = [
   {id:2, icon: <DnsIcon />, label: "Employees", href: "/dashboard/Empliyees" },
   {id:3, icon: <PermMedia />, label: "Core Hr", href: "/dashboard/Corehr" },
   {id:4, icon: <Public />, label: "Projects", href: "/dashboard/Projects" },
-  {id:5, icon: <AutoStoriesIcon />, label: "Task", href: "/dashboard/Task" },
+  {id:5, icon: <AutoStoriesIcon />, label: "Task", href: "/" },
   {id:6, icon: <AvTimerIcon />, label: "Performance", href: "/" },
   {id:7, icon: <PermMedia />, label: "Projects", href: "/" },
   {id:8, icon: <BarChartIcon />, label: "Reports", href: "/" },

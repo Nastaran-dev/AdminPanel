@@ -182,7 +182,7 @@ export default function CmBox3() {
           height: "400px",
           borderRadius: "10px",
           backgroundColor: dark ? "#1e2126" : "white",
-          border: "0.1px solid #35383c",
+          border: "0.1px solid #bebdbd",
           overflow: "hidden",
         }}
       >
@@ -306,7 +306,7 @@ export default function CmBox3() {
           height: "400px",
           borderRadius: "10px",
           backgroundColor: dark ? "#1e2126" : "white",
-          border: "0.1px solid #35383c",
+          border: "0.1px solid #bebdbd",
           padding: "10px 10px",
           overflow: "hidden",
           display: "flex",
