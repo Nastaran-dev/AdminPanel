@@ -215,7 +215,7 @@ export default function CustomizedList({ children }) {
   const { dark } = React.useContext(myTheme);
   const theme = useTheme();
   const Islaptop = useMediaQuery(theme.breakpoints.up("md"), { noSsr: true });
-  const [showIcon, setShowicon] = useState(true); 
+  const [showIcon, setShowicon] = useState(false); 
 
   const [open, setOpen] = React.useState(true);
   useEffect(() => {
